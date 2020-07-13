@@ -126,55 +126,28 @@ template <typename T>
 
 }
 template <typename T>
-void List<T>::setElement(std::size_t idx, T element)
+T& List<T>::operator[](std::size_t idx)
 {
-    ListNode<T>* p = m_head;
-    if(idx == 0) 
-    {
-       setFront(element);
-    }
-    if(idx == m_size)
-    {
-       setBack(element);
-    }
-    while(idx)
+   ListNode<T>* p = m_head;
+   while(idx)
     {
         p = p->getNext();
         --idx;
     }
 
-    p->setData(element);
+    return p->getData();
 }
-template <typename T>
-void List<T>::setBack(T element) 
+template<typename U>
+std::ostream& operator<<(std::ostream& os, const List<U>& ln)
 {
-   // m_head->setBack(T element);
-}
-template <typename T>
-void List<T>::setFront(T element) 
-{
-   // m_tail->setFront(T element);
-}
-
-template <typename T>
-void List<T>::erase(std::size_t idx)
-{
-     ListNode<T>* p = m_head;
-    if(idx == 0) 
-    {
-        popFront();
-    }
-    if(idx == m_size)
-    {
-        popBack();
-    }
-    while(idx)
-    {
-        p = p->getNext();
-        --idx;
-    }
-     delete[]this->p;
-    --m_size;
+   ListNode<U>*p = ln.m_head;
+   while(p != NULL)
+   {
+       os<< std::to_string(p->getData()) << " ";
+       p = p->getNext();
+   }
+    os << "\n";
+    return os;
 }
 
 template <typename T>

@@ -1,5 +1,6 @@
  #include "Vector.hpp"
 #include <cstdlib>
+constexpr std::size_t INITIAL_CAPACITY = 15;
  template <typename T>
 Vector<T>::Vector(const Vector &rhs)
 {
@@ -23,40 +24,71 @@ size_t Vector<T>:: getCapacity()
 template< typename T>
  Vector<T>::Vector()
 {
-   m_capacity=0;
+   m_capacity=INITIAL_CAPACITY;
    m_size=0;
-   m_data=0;
+   m_data=new T[INITIAL_CAPACITY];
 };
 template <typename T>
  void Vector<T>:: insert( size_t idx, T element){
      if(idx >= 0 && idx <= this->m_size){
-        for(size_t i = idx; i < this->m_size - 1; ++i){
+        for(size_t i = idx; i < this->m_size - 1; ++i)
+        {
             this->m_data[i+1] = this->m_data[i];
             this->m_size++;
         }
      this->m_data[idx]=element;
  }
  }
+
+ template <typename T>
+Vector<T>& Vector<T>::operator=(const Vector& rhs)
+{
+    if(m_capacity != rhs.m_capacity)
+    {
+        delete[] m_data;
+        m_data = new T[rhs.m_capacity];
+    }
+    m_capacity = rhs.m_capacity;
+    memcpy(m_data, rhs.m_data, m_capacity * sizeof(T));
+
+    return *this;
+}
+
  template<typename T>
- T Vector<T>::getElement(size_t idx)
+ T& Vector<T>::operator[](size_t idx) const
  {
      return m_data[idx];
  }
+
   template <typename T>
- int Vector<T>::setElement( size_t idx, T element)
+ T& Vector<T>::operator[]( size_t idx)
  {
-     this->m_data[idx]=element;
+     this->m_data[idx];
  }
+
+ template<typename U>
+std::ostream& operator<<(std::ostream& os, const Vector<U>& vec)
+{
+   for(std::size_t idx = 0; idx < vec.m_capacity; ++idx)
+   {
+       os << vec.m_data[idx] << " ";
+   }
+   os << std::endl;
+
+   return os;
+}
  template <typename T>
  T Vector<T>:: getFront()
  {
   return this->m_data[0];
  }
+
  template <typename T>
   T getBack()
  {
    return this->m_data[this->m_size-1];
  }
+
   template <typename T>
  int Vector<T>::pushFront(T element)
  {
@@ -69,6 +101,7 @@ template <typename T>
        this->m_data[0]= element;
    }
  }
+
   template <typename T>
  int Vector<T>::pushBack(T element)
  {
@@ -84,8 +117,10 @@ template <typename T>
  
   template <typename T>
  Vector<T>::~Vector()
- { delete []this->m_data;
+ { 
+     delete []this->m_data;
  }
+
   template <typename T>
  void Vector<T>:: reserve(std::size_t newCapacity)
  {
@@ -101,7 +136,8 @@ template <typename T>
          this->m_data=newData;
      }
  }
- template <typename T>
+
+  template <typename T>
  void Vector<T>::clear()
  {
    
@@ -109,23 +145,16 @@ template <typename T>
         this->m_data[i] = 0;
     }
  }
+  
   template <typename T>
  bool Vector<T>::empty()
 {
-    bool ok = 1;
-    while(ok)
-    {
-        for(size_t i = 0; i < this->m_size; ++i){
-            if(m_data[i] == NULL){
-                ok = 0;
-            }
-        }
-        return true;
-    }
-    return false;
-   
-
+   if(m_size==0)
+   return true;
+   else
+   return false;
 }
+ 
  template <typename T>
  void Vector<T>::erase(size_t idx)
  {

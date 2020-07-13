@@ -23,4 +23,10 @@ int main(){
   myq.pop();
   std::cout << myq;
 
+  List<int> list;
+  list.pushBack(10);
+  list.pushBack(11);
+  list.pushFront(13);
+  std::cout <<list;
+
 }
