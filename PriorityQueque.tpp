@@ -36,14 +36,25 @@ size_t PriorityQueue<T,TContainer>::getSize()
 template <typename T, template <typename> typename TContainer>
 void  PriorityQueue<T,TContainer>::push(T element)
 {
-    m_container.pushBack(element);
+    m_data.pushFront(element)
+
+        std::size_t pos = 0;
+        for (std::size_t idx = 0; idx < m_data.size(); ++idx)
+        {
+            if (m_data[idx] < element)
+            {
+                pos++;
+            }
+        }
+         m_data.pushFront(m_data[0]+pos,element);
+
 }
 template <typename T, template <typename> typename TContainer>
 T PriorityQueue<T,TContainer>::pop(T element)
 {
-    T value = m_container.getFront();
-    m_container.popFront();
-    return value;
+    T element= m_container.back();
+    m_container.popBack();
+    return task;
 }
 template <typename T, template <typename> typename TContainer>
 void PriorityQueue<T,TContainer>::clear()
