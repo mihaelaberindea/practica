@@ -208,4 +208,5 @@ List<T>::~List()
     }
     m_head = NULL;
     m_tail = NULL;
+    //--m_size;
 }
