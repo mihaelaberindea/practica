@@ -1,5 +1,22 @@
 #include <cstddef>
 #include <cstdlib>
+template<typename T>
+class VectorIterator
+{ public:
+   VectorIterator(T* value);
+   VectorIterator(const VectorIterator& rhs);
+   VectorIterator<T>& operator=(const VectorIterator& rhs);
+   bool operator!=(const VectorIterator& rhs);
+   bool operator<(const VectorIterator& rhs);
+   VectorIterator<T>& operator++();
+   VectorIterator<T>& operator--();
+   VectorIterator<T>& operator+=(std::size_t difference);
+   VectorIterator<T>& operator-=(std::size_t difference);
+   T& operator*();
+
+   private:
+   T* m_value;
+};
 template <typename T>
 class Vector
 {   
@@ -17,15 +34,18 @@ class Vector
     void popFront();
     void popBack();
     const T& operator[](size_t idx) const;
-    T getFront();
-    T getBack();
+    T& getFront();
+    T& getBack();
     T& operator[](size_t idx);
     int setFront(T element);
     int setBack(T element);
     void clear();
-    bool empty();
+    bool isEmpty();
     template<typename U>
     friend std::ostream& operator<<(std::ostream& os, const Vector<U>& vec);
+    void reserve(std::size_t newCapacity);
+    VectorIterator<T> begin();
+    VectorIterator<T> end();
 
     private:
     std::size_t m_capacity;
@@ -35,4 +55,4 @@ class Vector
     
 
 };;
-#include "Vector.tpp"
+//#include "Vector.tpp"

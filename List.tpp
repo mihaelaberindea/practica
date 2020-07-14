@@ -1,6 +1,63 @@
 #include "List.hpp"
 #include<cstddef>
 template <typename T>
+ ListIterator<T>::ListIterator(T* value):m_value(value)
+ {
+
+ }
+ template<typename T>
+ ListIterator<T>::ListIterator(const ListIterator& rhs)
+ {
+     m_value=rhs.m_value;
+ }
+ template<typename T>
+  ListIterator<T>& ListIterator<T>::operator=(const ListIterator& rhs)
+  {
+      return m_value=rhs.m_value;
+      return *this;
+  }
+  template<typename T>
+  bool ListIterator<T>::operator!=(const ListIteratorr& rhs)
+  {
+      return m_value!=rhs.m_value;
+  }
+  template<typename T>
+  bool ListIterator<T>::operator<(const ListIterator& rhs)
+  {
+       if(m_value<rhs.m_value)
+       return m_value;
+       else
+       return
+       rhs.m_value;
+  }
+  template<typename T>
+  ListIterator<T>& ListIterator<T>::operator++()
+  {
+      return ++m_value;
+      return *this;
+  }
+  template<typename T>
+  ListIterator<T>& ListIterator<T>::operator--()
+  {
+      return --m_value;
+      return *this;
+  }
+  ListIterator<T>& ListIterator<T>::operator+=(std::size_t difference)
+      return m_value+=difference;
+      return *this;
+  }
+  ListIterator<T>& ListIterator<T>::operator-=(std::size_t difference)
+      return m_value-=difference;
+      return *this;
+  }
+    template<typename T>
+  T& ListIterator<T>::operator*()
+  {
+      return *m_value;
+    
+  }
+
+template <typename T>
 List<T>::List()
 {
     m_size=0;
@@ -153,14 +210,11 @@ std::ostream& operator<<(std::ostream& os, const List<U>& ln)
 template <typename T>
 void List<T>::clear()
 {
-     for(size_t i = 0; i < this->m_size; ++i){
-        m_head=m_tail=NULL;
-    }
     m_size=0;
 
 }
 template <typename T>
-bool List<T>::empty()
+bool List<T>::isEmpty()
 {
   
     if(m_size==0)
@@ -171,15 +225,15 @@ bool List<T>::empty()
 template <typename T>
 List<T>::~List()
 {
-    ListNode* current = m_head;
-    ListNode* next;
-    while( current != NULL ) 
-    {
-        next = current->getNext();
-        delete current;
-        current = next;
-    }
-    m_head = NULL;
-    m_tail = NULL;
-    //--m_size;
+   delete [] m_data;
+   m_data=nulptr;
 }
+ ListIterator<T> List<T>::begin()
+ {
+     return ListIterator<T>(m_data);
+ }
+ template<typename T>
+ ListIterator<T> List<T>::end()
+ {
+     return ListIterator<T>(m_data+m_size);
+ }

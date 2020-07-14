@@ -1,7 +1,7 @@
 #ifndef PriorityQueque_HPP
 #define PriorityQueque_HPP
 #include <cstddef>
-template <typename T, template <typename> typename TContainer>
+template <typename T, typename TContainer>
 class PriorityQueque
 {
     public:
@@ -13,9 +13,10 @@ class PriorityQueque
     void push(T element);
     T pop(T element);
     void clear();
-    bool empty();
+    bool isEmpty();
     friend std::ostream& operator<<(std::ostream& os, const PriorityQueue<U,UTContainer>& prioq);
-    
+    typename TContainer::TIterator begin();
+    typename TContainer::TIterator end();
     private:
     TContainer m_container;
 };

@@ -1,6 +1,63 @@
 #include "ListNode.hpp"
 #include <cstdlib>
 template <typename T>
+ ListIterator<T>::ListIterator(T* value):m_value(value)
+ {
+
+ }
+ template<typename T>
+ ListIterator<T>::ListIterator(const ListIterator& rhs)
+ {
+     m_value=rhs.m_value;
+ }
+ template<typename T>
+  ListIterator<T>& ListIterator<T>::operator=(const ListIterator& rhs)
+  {
+      return m_value=rhs.m_value;
+      return *this;
+  }
+  template<typename T>
+  bool ListIterator<T>::operator!=(const ListIteratorr& rhs)
+  {
+      return m_value!=rhs.m_value;
+  }
+  template<typename T>
+  bool ListIterator<T>::operator<(const ListIterator& rhs)
+  {
+       if(m_value<rhs.m_value)
+       return m_value;
+       else
+       return
+       rhs.m_value;
+  }
+  template<typename T>
+  ListIterator<T>& ListIterator<T>::operator++()
+  {
+      return ++m_value;
+      return *this;
+  }
+  template<typename T>
+  ListIterator<T>& ListIterator<T>::operator--()
+  {
+      return --m_value;
+      return *this;
+  }
+  ListIterator<T>& ListIterator<T>::operator+=(std::size_t difference)
+      return m_value+=difference;
+      return *this;
+  }
+  ListIterator<T>& ListIterator<T>::operator-=(std::size_t difference)
+      return m_value-=difference;
+      return *this;
+  }
+    template<typename T>
+  T& ListIterator<T>::operator*()
+  {
+      return *m_value;
+    
+  }
+
+template <typename T>
 ListNode<T>::ListNode( ListNode*prev, ListNode* next, T data )
 {
   m_prev=prev;
@@ -17,14 +74,8 @@ ListNode<T>::ListNode (const ListNode& rhs)
 template<typename T>
 ListNode<T>::~ListNode()
 {
-  if(m_prev != NULL)
-     {
-        m_prev->m_next = m_next;
-     } 
-     if(m_next != NULL)
-     {
-        m_next->m_prev = m_prev;
-     }
+  delete [] m_data;
+  m_data=nullptr;
 }
 template <typename T>
 ListNode<T>& ListNode<T>::operator=(const ListNode& rhs)

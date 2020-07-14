@@ -2,22 +2,24 @@
 #include <iostream>
 #include <string.h>
 #include <ostream>
-template <typename T, template <typename> typename TContainer>
-PriorityQueque<T,TContainer>::Task()
+using TIterator = typename TContainer::TIterator;
+template <typename T,typename TContainer>
+PriorityQueque<T,TContainer>::PriorityQueque()
 {
     m_container=0;
 }
-template <typename T, template <typename> typename TContainer>
+template <typename T, typename TContainer>
  PriorityQueque<T,TContainer>::PriorityQueque(const PriorityQueue& rhs);
  {
      m_container=rhs.m_container;
  }
-template <typename T, template <typename> typename TContainer>
+template <typename T,typename TContainer>
 PriorityQueue<T,TContainer>::~PriorityQueue()
 {
-    delelte [] this->m_container;
+    delete[] m_container;
+    m_container=nullptr;
 }
-template <typename T, template <typename> typename TContainer>
+template <typename T, typename TContainer>
 PriorityQueue<T,TContainer>& PriorityQueue<T,TContainer>::operator=(const PriorityQueue& rhs)
 {
     m_container = rhs.m_container;
@@ -28,12 +30,12 @@ std::ostream& operator<<(std::ostream& os, const PriorityQueue<U,UTContainer>& q
     os << q.m_container;
     return os;
 }
-template <typename T, template <typename> typename TContainer>
+template <typename T, typename TContainer>
 size_t PriorityQueue<T,TContainer>::getSize()
 {
     return m_container.getSize;
 }
-template <typename T, template <typename> typename TContainer>
+template <typename T, typename TContainer>
 void  PriorityQueue<T,TContainer>::push(T element)
 {
     m_data.pushFront(element)
@@ -46,27 +48,39 @@ void  PriorityQueue<T,TContainer>::push(T element)
                 pos++;
             }
         }
-         m_data.pushFront(m_data[0]+pos,element);
+         m_data.insert(m_data.begin()+pos,element);
 
 }
-template <typename T, template <typename> typename TContainer>
+template <typename T, typename TContainer>
 T PriorityQueue<T,TContainer>::pop(T element)
 {
     T element= m_container.back();
     m_container.popBack();
-    return task;
+    return element;
 }
-template <typename T, template <typename> typename TContainer>
+template <typename T,typename TContainer>
 void PriorityQueue<T,TContainer>::clear()
 {
-    m_container.clear();
+    m_size=0;
 }
 
-template <typename T, template <typename> typename TContainer>
-bool PriorityQueue<T,TContainer>::empty()
+template <typename T,typename TContainer>
+bool PriorityQueue<T,TContainer>::isEmpty()
 {
     return m_container.empty();
 }
+ template <typename T,typename TContainer>
+TIterator begin()
+{
+   return TIterator<T>(m_data);
+}
+template <typename T,typename TContainer>
+TIterator end()
+{
+   return TIterator<T>(m_data+m_size);
+}
+
+
 
 
 

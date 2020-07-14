@@ -2,7 +2,23 @@
 #define LISTNODE_HPP
 
 #include <cstddef>
-
+template<typename T>
+class ListIterator
+{
+  public:
+   ListIterator(T* value);
+   ListIterator(const ListIterator& rhs);
+   ListIterator<T>& operator=(const ListIterator& rhs);
+   bool operator!=(const ListIterator& rhs);
+   bool operator<(const ListIterator& rhs);
+   ListIterator<T>& operator++();
+   ListIterator<T>& operator--();
+   ListIterator<T>& operator+=(std::size_t difference);
+   ListIterator<T>& operator-=(std::size_t difference);
+   T& operator*();
+   private:
+   T* m_value;
+};
 template <typename T>
 class ListNode
 {
@@ -29,4 +45,4 @@ class ListNode
     
 };
 #endif
-#include "ListNode.tpp"
+//#include "ListNode.tpp"
