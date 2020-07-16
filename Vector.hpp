@@ -1,3 +1,5 @@
+#ifndef Vector_HPP
+#define Vector_HPP
 #include <cstddef>
 #include <cstdlib>
 template<typename T>
@@ -44,6 +46,7 @@ class Vector
     template<typename U>
     friend std::ostream& operator<<(std::ostream& os, const Vector<U>& vec);
     void reserve(std::size_t newCapacity);
+    void resize(size_t newSize);
     VectorIterator<T> begin();
     VectorIterator<T> end();
 
@@ -55,4 +58,5 @@ class Vector
     
 
 };;
-//#include "Vector.tpp"
+#endif
+#include "Vector.tpp"

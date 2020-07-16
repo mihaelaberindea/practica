@@ -82,20 +82,7 @@ List<T>::List(const ListNode& rhs);
 template <typename T>
 size_t List<T>::getSize()
 {
-    if(m_head == NULL)
-     return 0;
-    if(m_head == m_tail) 
-    return 1;
-
-    size_t size = 0;
-    ListNode<T>* p = m_head;
-    while(p != NULL)
-    {
-        p = p->getNext();
-        ++size;
-    }
-
-    return size;
+    return m_size;
 }
 template <typename T>
 void List<T>::insert(std::size_t idx , T element)
@@ -121,7 +108,9 @@ void List<T>::insert(std::size_t idx , T element)
     node->setPrev(p->getPrev());
     p->setPrev(node);
     node->setNext(p);
-    
+    m_size++;
+
+    return *this;
     
 };
 
@@ -150,12 +139,6 @@ void List<T>::pushBack(T element)
    {
        m_head = m_tail = node;
    }
-   if(m_head == m_tail)
-   {
-       m_head->setNext(node);
-       node->setPrev(m_head);
-       m_tail = node;
-   }
    while(p->getNext() != NULL)
    {
        p = p->getNext();
@@ -177,12 +160,6 @@ T List<T>::getBack()
   return m_tail->getData();
 }
 template <typename T>
- T List<T>::getElement(std::size_t idx)
-{
-     this->m_size=idx;
-
-}
-template <typename T>
 T& List<T>::operator[](std::size_t idx)
 {
    ListNode<T>* p = m_head;
@@ -200,7 +177,7 @@ std::ostream& operator<<(std::ostream& os, const List<U>& ln)
    ListNode<U>*p = ln.m_head;
    while(p != NULL)
    {
-       os<< std::to_string(p->getData()) << " ";
+       os<< (p->getData()) << " ";
        p = p->getNext();
    }
     os << "\n";
@@ -216,11 +193,7 @@ void List<T>::clear()
 template <typename T>
 bool List<T>::isEmpty()
 {
-  
-    if(m_size==0)
-    return true;
-    else 
-    return false;
+    return m_size==0;
 }
 template <typename T>
 List<T>::~List()

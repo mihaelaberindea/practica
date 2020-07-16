@@ -29,4 +29,16 @@ int main(){
   list.pushFront(13);
   std::cout <<list;
 
+  
+  std::vector<int> src={ 1,2,3,4,5};
+  std::vector<int> dst={ 0,0,0,0,0};
+
+  copy(src.begin(),dst.begin());
+
+  std::vector<int> vec;
+  sort(vec.begin(),vec.end(),[](int lhs, int rhs) {return lhs < rhs;})
+
+  transform(vec.begin(),vec.end(),[](int value){ return value *2;})
+
+
 }

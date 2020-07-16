@@ -5,7 +5,7 @@ using TIterator = typename TContainer::TIterator;
  template <typename T,typename Tcontainer>
  Queque<T,Tcontainer>::Queque()
  {
-     m_container=0;
+    
  }
  template <typename T,typename Tcontainer>
  Queque<T,Tcontainer>::Queque(const Queque&rhs)
@@ -15,7 +15,7 @@ using TIterator = typename TContainer::TIterator;
   template <typename T,typename Tcontainer>
  Queque<T,Tcontainer>::~Queque()
  {
-     delete []this->m_container;
+
  }
  template <typename T,typename TContainer>
 Queue<T,TContainer>& Queue<T,TContainer>::operator=(const Queue& rhs)
@@ -59,12 +59,12 @@ template <typename T, typename Tcontainer>
 template <typename T,typename TContainer>
 TIterator begin()
 {
-  return TIterator<T>(m_data)
+  return TIterator<T>(m_container)
 }
 template <typename T,typename TContainer>
 TIterator end()
 {
-return TIterator<T>(m_data+m_size);
+return TIterator<T>(m_container+m_size);
 }
 
 

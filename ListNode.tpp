@@ -121,10 +121,10 @@ template<typename U>
 std::ostream& operator<<(std::ostream& os, const ListNode<U>& vec)
 {
     os << "prev: "
-              << ((ln.m_prev != NULL) ?  std::to_string(ln.m_prev->m_data) : "NULL") << "\n";  
+              << ((ln.m_prev != NULL) ?  (ln.m_prev->m_data) : "NULL") << "\n";  
     os << "data: " 
               << ln.m_data << "\n"; 
     os << "next: "
-              << ((ln.m_next != NULL) ?  std::to_string(ln.m_next->m_data) : "NULL") << "\n";
+              << ((ln.m_next != NULL) ?  (ln.m_next->m_data) : "NULL") << "\n";
    return os;
 }

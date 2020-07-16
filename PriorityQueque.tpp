@@ -6,7 +6,7 @@ using TIterator = typename TContainer::TIterator;
 template <typename T,typename TContainer>
 PriorityQueque<T,TContainer>::PriorityQueque()
 {
-    m_container=0;
+   
 }
 template <typename T, typename TContainer>
  PriorityQueque<T,TContainer>::PriorityQueque(const PriorityQueue& rhs);
@@ -16,8 +16,7 @@ template <typename T, typename TContainer>
 template <typename T,typename TContainer>
 PriorityQueue<T,TContainer>::~PriorityQueue()
 {
-    delete[] m_container;
-    m_container=nullptr;
+   
 }
 template <typename T, typename TContainer>
 PriorityQueue<T,TContainer>& PriorityQueue<T,TContainer>::operator=(const PriorityQueue& rhs)
@@ -38,17 +37,17 @@ size_t PriorityQueue<T,TContainer>::getSize()
 template <typename T, typename TContainer>
 void  PriorityQueue<T,TContainer>::push(T element)
 {
-    m_data.pushFront(element)
+    m_container.pushFront(element);
 
         std::size_t pos = 0;
-        for (std::size_t idx = 0; idx < m_data.size(); ++idx)
+        for (std::size_t idx = 0; idx < m_container.size(); ++idx)
         {
-            if (m_data[idx] < element)
+            if (m_container[idx] < element)
             {
                 pos++;
             }
         }
-         m_data.insert(m_data.begin()+pos,element);
+         m_container.insert(m_container.begin()+pos,element);
 
 }
 template <typename T, typename TContainer>
@@ -61,7 +60,7 @@ T PriorityQueue<T,TContainer>::pop(T element)
 template <typename T,typename TContainer>
 void PriorityQueue<T,TContainer>::clear()
 {
-    m_size=0;
+    m_container=0;
 }
 
 template <typename T,typename TContainer>
@@ -72,12 +71,12 @@ bool PriorityQueue<T,TContainer>::isEmpty()
  template <typename T,typename TContainer>
 TIterator begin()
 {
-   return TIterator<T>(m_data);
+   return TIterator<T>(m_container);
 }
 template <typename T,typename TContainer>
 TIterator end()
 {
-   return TIterator<T>(m_data+m_size);
+   return TIterator<T>(m_container+m_size);
 }
 
 
