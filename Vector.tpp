@@ -71,11 +71,8 @@ Vector<T>::Vector(const Vector &rhs)
 {
   m_size = rhs.m_size;
   m_capacity = rhs.m_capacity; 
- m_data = new T[m_capacity]; 
- for(size_t i=0; i<this->m_size;++i)
- {
-     m_data[idx]=rhs.m_data[idx];
- }
+  m_data = new T[m_capacity]; 
+  std::copy(rhs.m_data, rhs.m_data + rhs.m_size, m_data);
 }
 
  template <typename T>
@@ -94,11 +91,7 @@ Vector<T>& Vector<T>::operator=(const Vector& rhs)
         m_data = new T[rhs.m_capacity];
     }
     m_capacity = rhs.m_capacity;
-    for(size_t i=0; i<this->m_size;++i)
-     {
-     m_data[idx]=rhs.m_data[idx];
-     }
-
+    std::copy(rhs.m_data, rhs.m_data + rhs.m_size, m_capacity * sizeof(T));
     return *this;
 }
 
@@ -119,7 +112,7 @@ template <typename T>
  void Vector<T>:: insert( size_t idx, T element){
       if(m_size==m_capacity)
      {
-         reserve(1+m_capacity);
+         reserve((1+m_capacity)*2);
      }
      if(idx >= 0 && idx <= this->m_size){
         for(size_t i = idx; i < this->m_size - 1; ++i)
@@ -179,7 +172,7 @@ std::ostream& operator<<(std::ostream& os, const Vector<U>& vec)
  {
      if(m_size == m_capacity)
      {
-         reserve(1+m_capacity);
+         reserve((1+m_capacity)*2);
      }
      m_data[m_size]=element;
      m_size++;
@@ -204,15 +197,16 @@ std::ostream& operator<<(std::ostream& os, const Vector<U>& vec)
  {
      if(this->m_size<newSize)
      {
-         T* newData= new int [newSize];
-         this->m_size=newSize;
-         for(size_t i=0;i<this->m_size;++i)
-         {
-             newData[i]=this->m_data[i];
-         }
-         delete [] this->m_data;
-         this->m_data=newData;
-     }
+        for(std::size_t idx = m_size; idx < newSize; ++idx)
+        {
+            m_data[idx] = T();
+        }
+
+     }else
+       {
+        reserve((m_capacity + 1) * 2);
+       }
+      m_size = newSize;
  }
 
   template <typename T>
@@ -228,15 +222,18 @@ std::ostream& operator<<(std::ostream& os, const Vector<U>& vec)
 }
  
  template <typename T>
- void Vector<T>::erase(size_t idx)
+ void Vector<T>::erase(VectorIterator pos)
  {
-    /* size_t it;
-     for(it=idx.begin(); it!=idx.end(); it++)
-     {
-         return *it;
-     }
-     idx.erase(*it);
-     */
+     VectorIterator end = end();
+      --end;
+
+    for (VectorIterator current = pos; current != end; ++current)
+    {
+        VectorIterator next = current;
+        ++next;
+
+        current = next;        
+    }
  }
  template<typename T>
  VectorIterator<T> Vector<T>::begin()
