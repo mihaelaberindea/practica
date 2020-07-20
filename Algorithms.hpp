@@ -128,7 +128,11 @@ namespace pdv
   template<typename TInputIt, typename TOutputIt,typename T, typename TBinaryFunc>
   T reduce(TInputIt first, TInputIt last, T initValue, TBinaryFunc func)
   {
-
+    for(; first != last; ++first)
+        {
+           initValue = func(*first, initValue);
+        }
+        return initValue;
   }
 
 };
