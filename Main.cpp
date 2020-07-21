@@ -4,7 +4,7 @@
 #include <cstdlib>
 
 int main(){
-   Vector<int> vec;
+  /* Vector<int> vec;
   vec.pushBack(0);
   vec.pushBack(1);
   vec.pushBack(2);
@@ -28,7 +28,7 @@ int main(){
   list.pushBack(11);
   list.pushFront(13);
   std::cout <<list;
-
+  */
   
   std::vector<int> src={ 1,2,3,4,5};
   std::vector<int> dst={ 0,0,0,0,0};
@@ -40,5 +40,16 @@ int main(){
 
   transform(vec.begin(),vec.end(),[](int value){ return value *2;})
 
+    Vector<int> vec1;
+    vec1.resize(10);
+
+    pdv::transform(vec.begin(),vec.end(), vec1.begin(), [](int a){ return ++a;});
+    std::cout << vec1 << "\n";
+
+    int sum = pdv::reduce(vec.begin(), vec.end(), 0, [](int a, int b) {return a + b;});
+    std::cout << sum << "\n";
+    
+     int prod = pdv::reduce(vec.begin(), vec.end(), 0, [](int a, int b) {return a * b;});
+    std::cout << prod << "\n";
 
 }

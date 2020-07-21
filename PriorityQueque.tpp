@@ -1,6 +1,7 @@
 #include "PriorityQueque.hpp" 
 #include <iostream>
 #include <string.h>
+#include "Vector.hpp"
 #include <ostream>
 using TIterator = typename TContainer::TIterator;
 template <typename T,typename TContainer>
@@ -13,7 +14,7 @@ template <typename T, typename TContainer>
  {
      m_container=rhs.m_container;
  }
-template <typename T,typename TContainer>
+template<typename T,typename TContainer>
 PriorityQueue<T,TContainer>::~PriorityQueue()
 {
    
@@ -32,7 +33,7 @@ std::ostream& operator<<(std::ostream& os, const PriorityQueue<U,UTContainer>& q
 template <typename T, typename TContainer>
 size_t PriorityQueue<T,TContainer>::getSize()
 {
-    return m_container.getSize;
+    return m_container.getSize();
 }
 template <typename T, typename TContainer>
 void  PriorityQueue<T,TContainer>::push(T element)
@@ -53,7 +54,7 @@ void  PriorityQueue<T,TContainer>::push(T element)
 template <typename T, typename TContainer>
 T PriorityQueue<T,TContainer>::pop(T element)
 {
-    T element= m_container.back();
+    T element= m_container.getBack();
     m_container.popBack();
     return element;
 }
