@@ -14,6 +14,8 @@ class VectorIterator
    VectorIterator<T>& operator--();
    VectorIterator<T>& operator+=(std::size_t difference);
    VectorIterator<T>& operator-=(std::size_t difference);
+   VectorIterator<T>& operator+(std::size_t difference);
+   VectorIterator<T>& operator-(std::size_t difference);
    T& operator*();
 
    private:
@@ -25,11 +27,12 @@ class Vector
     public:
     Vector();
     Vector(const Vector &rhs);
+    Vector(Vector&& rhs);
     ~Vector();
     Vector<T>& operator=(const Vector& rhs);
     size_t getSize();
     size_t getCapacity();
-    void insert(size_t idx, T element);
+    void insert(TIterator ipos, T element);
     void pushFront(T element);
     void pushBack(T element);
     void erase (size_t idx);

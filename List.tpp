@@ -1,14 +1,15 @@
 #include "List.hpp"
 #include<cstddef>
+#include<iostream>
 template <typename T>
  ListIterator<T>::ListIterator(T* value):m_value(value)
  {
 
  }
  template<typename T>
- ListIterator<T>::ListIterator(const ListIterator& rhs)
+ ListIterator<T>::ListIterator(const ListIterator& rhs):m_value(rhs.m_value)
  {
-     m_value=rhs.m_value;
+    
  }
  template<typename T>
   ListIterator<T>& ListIterator<T>::operator=(const ListIterator& rhs)
@@ -17,9 +18,10 @@ template <typename T>
       return *this;
   }
   template<typename T>
-  bool ListIterator<T>::operator!=(const ListIteratorr& rhs)
+  bool ListIterator<T>::operator!=(const ListIterator& rhs)
   {
       return m_value!=rhs.m_value;
+      return *this;
   }
   template<typename T>
   bool ListIterator<T>::operator<(const ListIterator& rhs)
@@ -42,15 +44,45 @@ template <typename T>
       return --m_value;
       return *this;
   }
+  template<typename T>
   ListIterator<T>& ListIterator<T>::operator+=(std::size_t difference)
-      return m_value+=difference;
+  {   return m_value+=difference;
       return *this;
   }
+  template<typename T>
   ListIterator<T>& ListIterator<T>::operator-=(std::size_t difference)
-      return m_value-=difference;
-      return *this;
+  {    return m_value-=difference;
+       return *this;
   }
-    template<typename T>
+   template<typename T>
+  ListIterator<T>& ListIterator<T>::operator+(std::size_t difference)
+  {   
+      ListIterator temp;
+      List list;
+      int n=list.getSize();
+      temp.resize(n);
+      for(int i=0; i<n; i++)
+      {
+          temp.at(i)=list.at(i)+difference(i);
+      }
+      return temp;
+        
+  }
+  template<typename T>
+  ListIterator<T>& ListIterator<T>::operator-(std::size_t difference)
+  {    
+      ListIterator temp;
+      List list;
+      int n=list.getSize();
+      temp.resize(n);
+      for(int i=0; i<n; i++)
+      {
+          temp.at(i)=list.at(i)-difference(i);
+      }
+      return temp;
+        
+  }
+  template<typename T>
   T& ListIterator<T>::operator*()
   {
       return *m_value;
@@ -65,7 +97,7 @@ List<T>::List()
     m_head=NULL;
 }
 template <typename T>
-List<T>::List(const ListNode& rhs);
+List<T>::List(const List& rhs) 
 {
     m_size = 0;
     m_head = NULL;
@@ -78,6 +110,15 @@ List<T>::List(const ListNode& rhs);
        ++m_size;
        p = p->getNext();
    }
+   return *this;
+}
+template<typename T>
+List<T>::List(List && rhs)
+{  m_head=rhs.m_head;
+   rhs.m_head=nullptr;
+   m_tail=rhs.m_tail;
+   rhs.m_tail=nullptr;
+
 }
 template <typename T>
 size_t List<T>::getSize()
@@ -201,12 +242,13 @@ List<T>::~List()
    delete [] m_data;
    m_data=nulptr;
 }
+template <typename T>
  ListIterator<T> List<T>::begin()
  {
-     return ListIterator<T>(m_data);
+     return ListIterator<T>(m_head);
  }
  template<typename T>
  ListIterator<T> List<T>::end()
  {
-     return ListIterator<T>(m_data+m_size);
+     return ListIterator<T>(m_tail);
  }

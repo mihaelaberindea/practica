@@ -1,4 +1,4 @@
- #include "Vector.hpp"
+#include "Vector.hpp"
 #include <cstdlib>
 constexpr std::size_t INITIAL_CAPACITY = 15;
  template <typename T>
@@ -43,14 +43,42 @@ constexpr std::size_t INITIAL_CAPACITY = 15;
       return --m_value;
       return *this;
   }
+  template<typename T>
   VectorIterator<T>& VectorIterator<T>::operator+=(std::size_t difference)
       return m_value+=difference;
       return *this;
   }
+  template<typename T>
   VectorIterator<T>& VectorIterator<T>::operator-=(std::size_t difference)
       return m_value-=difference;
       return *this;
   }
+  template<typename T>
+  VectorIterator<T>& VectorIterator<T>::operator+(std::size_t difference)
+  {
+     VectorIterator temp;
+     Vector vec;
+      int n=vec.getSize();
+      temp.resize(n);
+      for(int i=0; i<n; i++)
+      {
+          temp.at(i)=vec.at(i)+difference(i);
+      }
+      return temp;
+  }
+  template<typename T>
+  VectorIterator<T>& VectorIterator<T>::operator-(std::size_t difference)
+  {
+      VectorIterator temp;
+      int n=vec.getSize();
+      temp.resize(n);
+      for(int i=0; i<n; i++)
+      {
+          temp.at(i)=vec.at(i)-difference(i);
+      }
+      return temp;
+  }
+
     template<typename T>
   T& VectorIterator<T>::operator*()
   {
@@ -67,14 +95,19 @@ template< typename T>
 };
 
  template <typename T>
-Vector<T>::Vector(const Vector &rhs)
-{
+Vector<T>::Vector(const Vector & rhs)
+{  delete[] m_data;
   m_size = rhs.m_size;
   m_capacity = rhs.m_capacity; 
   m_data = new T[m_capacity]; 
   std::copy(rhs.m_data, rhs.m_data + rhs.m_size, m_data);
 }
-
+ template <typename T>
+Vector<T>::Vector(Vector&& rhs)
+{
+    m_data=rhs.m_data;
+    rhs.m_data=nullptr;
+}
  template <typename T>
  Vector<T>::~Vector()
  { 
@@ -109,19 +142,22 @@ size_t Vector<T>:: getCapacity()
 }
 
 template <typename T>
- void Vector<T>:: insert( size_t idx, T element){
+ void Vector<T>:: insert( TIterator ipos, T element){
       if(m_size==m_capacity)
      {
          reserve((1+m_capacity)*2);
      }
-     if(idx >= 0 && idx <= this->m_size){
-        for(size_t i = idx; i < this->m_size - 1; ++i)
-        {
-            this->m_data[i+1] = this->m_data[i];
-           
-        }
+
+      VectorIterator end = end();
+      --end;
+      for (VectorIterator current = ipos; current != end; ++current)
+    {
+        VectorIterator  element = current ;
+        ++element;     
+    }
+      
      this->m_size++;
-     this->m_data[idx]=element;
+     this->m_data[ipos]=element;
  }
  }
 

@@ -59,6 +59,16 @@ T SynchronizedPriorityQueue<T,TContainer,TLock>::pop(T element)
     return element;
     
 }
+template<typename T, typename TContainer, typename TLock>
+bool SynchronizedPriorityQueue<T,TContainer,TLock>::tryPop(T& value)
+{
+    if(!m_container=isEmpty())
+    {
+        value=m_container.pop();
+        return true;
+    }
+    return false;
+}
 template <typename T,typename TContainer, typename TLock>
 void SynchronizedPriorityQueue<T,TContainer, TLock>::clear()
 {   m_lock.lock();

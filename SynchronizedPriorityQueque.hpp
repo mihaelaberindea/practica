@@ -15,6 +15,7 @@ class SyncronizedPriorityQueque
     size_t getSize();
     void pushElement(T element);
     T pop();
+    bool tryPop(T& value);
     void clear();
     bool isEmpty();
     friend std::ostream& operator<<(std::ostream& os, const SynchronizedPriorityQueue<U,UTContainer,UTLock>& sprioq);
