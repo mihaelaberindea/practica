@@ -56,27 +56,14 @@ constexpr std::size_t INITIAL_CAPACITY = 15;
   template<typename T>
   VectorIterator<T>& VectorIterator<T>::operator+(std::size_t difference)
   {
-     VectorIterator temp;
-     Vector vec;
-      int n=vec.getSize();
-      temp.resize(n);
-      for(int i=0; i<n; i++)
-      {
-          temp.at(i)=vec.at(i)+difference(i);
-      }
-      return temp;
+      return m_value+=difference;
+      return *this;
   }
   template<typename T>
   VectorIterator<T>& VectorIterator<T>::operator-(std::size_t difference)
   {
-      VectorIterator temp;
-      int n=vec.getSize();
-      temp.resize(n);
-      for(int i=0; i<n; i++)
-      {
-          temp.at(i)=vec.at(i)-difference(i);
-      }
-      return temp;
+      return m_value-=difference;
+      return *this;
   }
 
     template<typename T>

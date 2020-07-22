@@ -57,31 +57,16 @@ template <typename T>
    template<typename T>
   ListIterator<T>& ListIterator<T>::operator+(std::size_t difference)
   {   
-      ListIterator temp;
-      List list;
-      int n=list.getSize();
-      temp.resize(n);
-      for(int i=0; i<n; i++)
-      {
-          temp.at(i)=list.at(i)+difference(i);
-      }
-      return temp;
-        
+       return m_value+=difference;
+       return *this;
   }
   template<typename T>
   ListIterator<T>& ListIterator<T>::operator-(std::size_t difference)
-  {    
-      ListIterator temp;
-      List list;
-      int n=list.getSize();
-      temp.resize(n);
-      for(int i=0; i<n; i++)
-      {
-          temp.at(i)=list.at(i)-difference(i);
-      }
-      return temp;
-        
+  {  
+       return m_value-=difference;
+       return *this;
   }
+  
   template<typename T>
   T& ListIterator<T>::operator*()
   {
