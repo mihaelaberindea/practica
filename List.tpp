@@ -57,14 +57,16 @@ template <typename T>
    template<typename T>
   ListIterator<T>& ListIterator<T>::operator+(std::size_t difference)
   {   
-       return m_value+=difference;
-       return *this;
+      ListIterator<T> it;
+      it = m_value + difference;
+      return it;
   }
   template<typename T>
   ListIterator<T>& ListIterator<T>::operator-(std::size_t difference)
   {  
-       return m_value-=difference;
-       return *this;
+      ListIterator<T> it;
+      it = m_value + difference;
+      return it;
   }
   
   template<typename T>

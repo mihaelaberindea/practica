@@ -56,14 +56,16 @@ constexpr std::size_t INITIAL_CAPACITY = 15;
   template<typename T>
   VectorIterator<T>& VectorIterator<T>::operator+(std::size_t difference)
   {
-      return m_value+=difference;
-      return *this;
+      VectorIterator<T> it;
+      it.m_value = m_value + difference;
+      return it;
   }
   template<typename T>
   VectorIterator<T>& VectorIterator<T>::operator-(std::size_t difference)
   {
-      return m_value-=difference;
-      return *this;
+      VectorIterator<T> it;
+      it.m_value = m_value - difference;
+      return it;
   }
 
     template<typename T>

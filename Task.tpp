@@ -4,14 +4,22 @@
 
 function<TaskResult(TaskArgument)> Task::Task(int64_t prio,function<TaskResult(TaskArgument)> func)
 {
-
+   m_priority = prio;
+   m_function = func;
 }
-TaskResult Task::operator()(TaskArgument)
+int64_t Task::getPriority()
 {
-   m_function(TaskArgument);
-   return TaskResult;
+    return m_priority;
+}
+TaskResult Task::operator()(TaskArgument arg)
+{
+   return m_function(arg);
 }
 bool Task::operator<(const Task& rhs)
 {
-    return m_priority < rhs.m_priority;
+    if( m_priority < rhs.m_priority)
+    { 
+        return true;
+    }    
+    return false;
 }
