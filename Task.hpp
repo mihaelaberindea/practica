@@ -1,14 +1,15 @@
 #ifndef TASK_HPP
 #define TASK_HPP
-#include <cstddef>
-#include <cstdlib>
-#include <iostream>
+#include <cstdint>
 #include <ostream>
-#include <string>
+#include <functional>
+
+#include "TaskArgument.hpp"
+#include "TaskResult.hpp"
 class Task
 { 
  public:
-   function<TaskResult(TaskArgument)> Task(int64_t prio,function<TaskResult(TaskArgument)> func);
+   Task(int64_t prio,function<TaskResult(TaskArgument)> func);
    TaskResult operator()(TaskArgument);
    bool operator<(const Task& rhs);
    int64_t getPriority();

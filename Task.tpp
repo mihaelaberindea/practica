@@ -1,8 +1,9 @@
 #include "Task.hpp" 
 #include "TaskArgument.hpp"
-#include <iostream>
+#include "TaskResult.hpp"
+#include <ostream>
 
-function<TaskResult(TaskArgument)> Task::Task(int64_t prio,function<TaskResult(TaskArgument)> func)
+Task::Task(int64_t prio, std::function<TaskResult(TaskArgument)> func)
 {
    m_priority = prio;
    m_function = func;

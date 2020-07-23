@@ -114,6 +114,20 @@ Vector<T>& Vector<T>::operator=(const Vector& rhs)
     }
     m_capacity = rhs.m_capacity;
     std::copy(rhs.m_data, rhs.m_data + rhs.m_size, m_capacity * sizeof(T));
+    
+    return *this;
+}
+template <typename T>
+Vector<T>& Vector<T>::operator=(Vector&& rhs)
+{
+
+    m_capacity = rhs.m_capacity;
+    m_size = rhs.m_size;
+    m_data = rhs.m_data;
+
+    rhs.m_data = nullptr;
+    rhs.m_capacity = rhs.m_size = 0;
+    
     return *this;
 }
 
