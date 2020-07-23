@@ -1,55 +1,56 @@
-#include "Vector.hpp"
 #include "List.hpp"
 #include "ListNode.hpp"
+#include "Vector.hpp"
 #include <cstdlib>
 
-int main(){
-  /* Vector<int> vec;
-  vec.pushBack(0);
-  vec.pushBack(1);
-  vec.pushBack(2);
-  vec.pushBack(3);
-  vec.pushBack(4);
-  vec.pushFront(5);
+int main()
+{
+    /* Vector<int> vec;
+    vec.pushBack(0);
+    vec.pushBack(1);
+    vec.pushBack(2);
+    vec.pushBack(3);
+    vec.pushBack(4);
+    vec.pushFront(5);
 
-  std::cout << vec[0] << std::endl; 
-  std::cout << vec[1] << std::endl; 
-  std::cout << vec[2] << std::endl; 
+    std::cout << vec[0] << std::endl;
+    std::cout << vec[1] << std::endl;
+    std::cout << vec[2] << std::endl;
 
-  Queue<int, List> myq;
-  myq.push(6);
-  myq.push(7);
-  myq.push(8);
-  myq.pop();
-  std::cout << myq;
+    Queue<int, List> myq;
+    myq.push(6);
+    myq.push(7);
+    myq.push(8);
+    myq.pop();
+    std::cout << myq;
 
-  List<int> list;
-  list.pushBack(10);
-  list.pushBack(11);
-  list.pushFront(13);
-  std::cout <<list;
-  */
-  
-  std::vector<int> src={ 1,2,3,4,5};
-  std::vector<int> dst={ 0,0,0,0,0};
+    List<int> list;
+    list.pushBack(10);
+    list.pushBack(11);
+    list.pushFront(13);
+    std::cout <<list;
+    */
 
-  copy(src.begin(),dst.begin());
+    std::vector<int> src = {1, 2, 3, 4, 5};
+    std::vector<int> dst = {0, 0, 0, 0, 0};
 
-  std::vector<int> vec;
-  sort(vec.begin(),vec.end(),[](int lhs, int rhs) {return lhs < rhs;})
+    copy(src.begin(), dst.begin());
 
-  transform(vec.begin(),vec.end(),[](int value){ return value *2;})
+    std::vector<int> vec;
+    sort(vec.begin(), vec.end(), [](int lhs, int rhs) { return lhs < rhs; })
 
-    Vector<int> vec1;
+        transform(vec.begin(), vec.end(), [](int value) { return value * 2; })
+
+            Vector<int>
+                vec1;
     vec1.resize(10);
 
-    pdv::transform(vec.begin(),vec.end(), vec1.begin(), [](int a){ return ++a;});
+    pdv::transform(vec.begin(), vec.end(), vec1.begin(), [](int a) { return ++a; });
     std::cout << vec1 << "\n";
 
-    int sum = pdv::reduce(vec.begin(), vec.end(), 0, [](int a, int b) {return a + b;});
+    int sum = pdv::reduce(vec.begin(), vec.end(), 0, [](int a, int b) { return a + b; });
     std::cout << sum << "\n";
-    
-     int prod = pdv::reduce(vec.begin(), vec.end(), 0, [](int a, int b) {return a * b;});
-    std::cout << prod << "\n";
 
+    int prod = pdv::reduce(vec.begin(), vec.end(), 0, [](int a, int b) { return a * b; });
+    std::cout << prod << "\n";
 }

@@ -3,36 +3,37 @@
 #include "TaskResult.hpp"
 class TaskScheduler
 {
-    public:
+  public:
     TaskScheduler(size_t count)
     {
-        ++count;
-        m_stop=false;
+        for (std::idx = 0; idx < count; ++idx)
+        {
+            m_threads.pushBack(std::thread(&TaskScheduler::processTask, this));
+        }
     }
-   ~TaslScheduler()
-   {
-       m_stop=true;
-       m_threads.join();
-   }
-   std::future<TaskResult> schedule(TaskArgument arg, int64_t prio)
+    ~TaskScheduler()
     {
-
+        m_stop = true;
+        for (std::idx = 0; idx < count; ++idx)
+        {
+            m_threads.join(std::thread(&TaskScheduler::processTask, this));
+        }
     }
+    std::future<TaskResult> schedule(TaskArgument arg, int64_t prio) {}
     void stop()
     {
-      m_stop=false;
-      return *this;
+        m_stop = false;
+        return *this;
     }
 
-    private:
+  private:
     void processTask()
     {
-        while(!m_stop=false)
+        while (!m_stop = false)
         {
-            if(!m_tasks=isEmpty())
+            if (!m_tasks = isEmpty())
             {
                 m_tasks.tryPop();
-                
             }
             return m_tasks;
         }

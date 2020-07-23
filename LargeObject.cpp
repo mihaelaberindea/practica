@@ -3,7 +3,7 @@
 
 LargeObject::LargeObject()
 {
-    for(size_t i = 0; i < LARGE_OBJECT_SIZE; ++i)
+    for (size_t i = 0; i < LARGE_OBJECT_SIZE; ++i)
     {
         m_data[i] = std::rand();
     }
@@ -11,7 +11,7 @@ LargeObject::LargeObject()
 
 LargeObject::~LargeObject()
 {
-    for(size_t i = 0; i < LARGE_OBJECT_SIZE; ++i)
+    for (size_t i = 0; i < LARGE_OBJECT_SIZE; ++i)
     {
         m_data[i] = 0;
     }

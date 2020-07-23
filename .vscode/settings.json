@@ -42,5 +42,6 @@
         "*.tpp": "cpp",
         "chrono": "cpp",
         "thread": "cpp"
-    }
+    },
+    "editor.formatOnPaste": true
 }

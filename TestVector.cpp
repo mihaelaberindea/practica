@@ -1,5 +1,5 @@
 #include "Vector.hpp"
-#include<cassert>
+#include <cassert>
 
 void TestGetSize()
 {
@@ -11,16 +11,12 @@ void TestGetCapacity()
     Vector vec;
     assert(vec.GetCapacity() == 0);
 }
-void TestInsert()
+void TestInsert() { Vector vec = assert(vec.insert(2)); }
+int main()
 {
-    Vector vec=
-    assert(vec.insert(2));
-}
- int main()
- {
-     TestGetSize();
-     TestGetCapacity();
-     TestInsert();
+    TestGetSize();
+    TestGetCapacity();
+    TestInsert();
 
-     return 0;
- }
+    return 0;
+}

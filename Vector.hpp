@@ -2,31 +2,32 @@
 #define Vector_HPP
 #include <cstddef>
 #include <cstdlib>
-template<typename T>
+template <typename T>
 class VectorIterator
-{ public:
-   VectorIterator(T* value);
-   VectorIterator(const VectorIterator& rhs);
-   VectorIterator<T>& operator=(const VectorIterator& rhs);
-   bool operator!=(const VectorIterator& rhs);
-   bool operator<(const VectorIterator& rhs);
-   VectorIterator<T>& operator++();
-   VectorIterator<T>& operator--();
-   VectorIterator<T>& operator+=(std::size_t difference);
-   VectorIterator<T>& operator-=(std::size_t difference);
-   VectorIterator<T>& operator+(std::size_t difference);
-   VectorIterator<T>& operator-(std::size_t difference);
-   T& operator*();
+{
+  public:
+    VectorIterator(T* value);
+    VectorIterator(const VectorIterator& rhs);
+    VectorIterator<T>& operator=(const VectorIterator& rhs);
+    bool operator!=(const VectorIterator& rhs);
+    bool operator<(const VectorIterator& rhs);
+    VectorIterator<T>& operator++();
+    VectorIterator<T>& operator--();
+    VectorIterator<T>& operator+=(std::size_t difference);
+    VectorIterator<T>& operator-=(std::size_t difference);
+    VectorIterator<T>& operator+(std::size_t difference);
+    VectorIterator<T>& operator-(std::size_t difference);
+    T& operator*();
 
-   private:
-   T* m_value;
+  private:
+    T* m_value;
 };
 template <typename T>
 class Vector
-{   
-    public:
+{
+  public:
     Vector();
-    Vector(const Vector &rhs);
+    Vector(const Vector& rhs);
     Vector(Vector&& rhs);
     ~Vector();
     Vector<T>& operator=(const Vector& rhs);
@@ -35,7 +36,7 @@ class Vector
     void insert(TIterator ipos, T element);
     void pushFront(T element);
     void pushBack(T element);
-    void erase (size_t idx);
+    void erase(size_t idx);
     void popFront();
     void popBack();
     const T& operator[](size_t idx) const;
@@ -46,20 +47,18 @@ class Vector
     int setBack(T element);
     void clear();
     bool isEmpty();
-    template<typename U>
+    template <typename U>
     friend std::ostream& operator<<(std::ostream& os, const Vector<U>& vec);
     void reserve(std::size_t newCapacity);
     void resize(size_t newSize);
     VectorIterator<T> begin();
     VectorIterator<T> end();
 
-    private:
+  private:
     std::size_t m_capacity;
     std::size_t m_size;
     T* m_data;
-    
-    
-
-};;
+};
+;
 #endif
 #include "Vector.tpp"

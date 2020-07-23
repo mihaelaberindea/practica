@@ -2,17 +2,17 @@
 #define Queque_HPP
 #include <cstddef>
 #include <cstdlib>
-template<typename T,typename Tcontainer>
+template <typename T, typename Tcontainer>
 class Queque
-{  using TIterator = typename TContainer::TIterator;
+{
+    using TIterator = typename TContainer::TIterator;
 
-    public:
+  public:
     Queque();
-    Queque(const Queque&rhs);
-    ~Queque()
-    Queue<T,TContainer>& operator=(const Queue& rhs);
+    Queque(const Queque& rhs);
+    ~Queque() Queue<T, TContainer>& operator=(const Queue& rhs);
     template <typename U, template <typename> typename UTContainer>
-    friend std::ostream& operator<<(std::ostream& os, const Queue<U,UTContainer>& myq);
+    friend std::ostream& operator<<(std::ostream& os, const Queue<U, UTContainer>& myq);
     size_t getSize();
     void push(T element);
     T pop(T element);
@@ -20,7 +20,8 @@ class Queque
     bool isEmpty();
     TIterator begin();
     TIterator end();
-    private:
+
+  private:
     Tcontainer m_container;
 };
 #endif
