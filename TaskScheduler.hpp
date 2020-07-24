@@ -1,3 +1,5 @@
+#ifndef TASKSCHEDULER_HPP
+#define TASKSCHEDULER_HPP
 #include "SynchronizedPriorityQueque.hpp"
 #include "TaskArgument.hpp"
 #include "TaskResult.hpp"
@@ -20,11 +22,7 @@ class TaskScheduler
         }
     }
     std::future<TaskResult> schedule(TaskArgument arg, int64_t prio) {}
-    void stop()
-    {
-        m_stop = false;
-        return *this;
-    }
+    void stop() { m_stop = false; }
 
   private:
     void processTask()
@@ -42,4 +40,5 @@ class TaskScheduler
     SynchronizedPriorityQueque<packaged_task<Task>> m_tasks;
     Vector<thread> m_threads;
     std::atomic<bool> m_stop;
-}
+};
+#endif
