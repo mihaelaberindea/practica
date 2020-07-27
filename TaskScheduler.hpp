@@ -8,6 +8,7 @@ class TaskScheduler
   public:
     TaskScheduler(size_t count)
     {
+        m_stop = false;
         for (std::idx = 0; idx < count; ++idx)
         {
             m_threads.pushBack(std::thread(&TaskScheduler::processTask, this));
@@ -16,9 +17,9 @@ class TaskScheduler
     ~TaskScheduler()
     {
         m_stop = true;
-        for (std::idx = 0; idx < count; ++idx)
+        for (std::thread& t : m_threads)
         {
-            m_threads.join(std::thread(&TaskScheduler::processTask, this));
+            t.join();
         }
     }
     std::future<TaskResult> schedule(TaskArgument arg, int64_t prio) {}
@@ -29,13 +30,12 @@ class TaskScheduler
     {
         while (!m_stop = false)
         {
-            if (!m_tasks = isEmpty())
+            Task task;
+            if (m_tasks.tryPop(task))
             {
-                m_tasks.tryPop();
+                task();
             }
-            return m_tasks;
         }
-        return *this;
     }
     SynchronizedPriorityQueque<packaged_task<Task>> m_tasks;
     Vector<thread> m_threads;
