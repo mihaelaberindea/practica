@@ -33,9 +33,12 @@ class Vector
     Vector<T>& operator=(const Vector& rhs);
     size_t getSize();
     size_t getCapacity();
-    void insert(TIterator ipos, T element);
-    void pushFront(T element);
-    void pushBack(T element);
+    void insert(TIterator ipos, T& element);
+    void insert(TIterator ipos, T&& element);
+    void pushFront(T& element);
+    void pushFront(T&& element);
+    void pushBack(T& element);
+    void pushBack(T&& element);
     void erase(size_t idx);
     void popFront();
     void popBack();

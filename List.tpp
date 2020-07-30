@@ -2,7 +2,7 @@
 #include <cstddef>
 #include <iostream>
 template <typename T>
-ListIterator<T>::ListIterator(T* value)
+ListIterator<T>::ListIterator(ListNode* value)
     : m_value(value)
 {
 }

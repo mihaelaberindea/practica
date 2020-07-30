@@ -41,7 +41,14 @@
         "typeinfo": "cpp",
         "*.tpp": "cpp",
         "chrono": "cpp",
-        "thread": "cpp"
+        "thread": "cpp",
+        "condition_variable": "cpp",
+        "ctime": "cpp",
+        "functional": "cpp",
+        "iterator": "cpp",
+        "ratio": "cpp",
+        "mutex": "cpp"
     },
-    "editor.formatOnPaste": true
+    "editor.formatOnPaste": true,
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools"
 }

@@ -10,9 +10,10 @@ class Task
 {
   public:
     Task(int64_t prio, function<TaskResult(TaskArgument)> func);
-    TaskResult operator()(TaskArgument);
+    TaskResult operator()();
     bool operator<(const Task& rhs);
     int64_t getPriority();
+    std::function<TaskResult()> get_m_function();
 
   private:
     function<TaskResult(TaskArgument)> m_function;

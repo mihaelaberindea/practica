@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <iostream>
 template <typename T>
-ListIterator<T>::ListIterator(T* value)
+ListIterator<T>::ListIterator(ListNode* value)
     : m_value(value)
 {
 }
@@ -56,6 +56,20 @@ ListIterator<T>& ListIterator<T>::operator-=(std::size_t difference)
     return *this;
 }
 template <typename T>
+ListIterator<T>& ListIterator<T>::operator+(std::size_t difference)
+{
+    ListIterator<T> it;
+    it = m_value + difference;
+    return it;
+}
+template <typename T>
+ListIterator<T>& ListIterator<T>::operator-(std::size_t difference)
+{
+    ListIterator<T> it;
+    it = m_value - difference;
+    return it;
+}
+template <typename T>
 T& ListIterator<T>::operator*()
 {
     return *m_value;
@@ -96,7 +110,7 @@ T& getPrev()
     return m_prev;
 }
 template <typename T>
-T& ListNode<T>::getNext()
+ListNode& ListNode<T>::getNext()
 {
     return m_next;
 }

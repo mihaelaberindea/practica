@@ -7,7 +7,7 @@ template <typename T>
 class ListIterator
 {
   public:
-    ListIterator(T* value);
+    ListIterator(ListNode* value);
     ListIterator(const ListIterator& rhs);
     ListIterator<T>& operator=(const ListIterator& rhs);
     bool operator!=(const ListIterator& rhs);
@@ -21,7 +21,7 @@ class ListIterator
     T& operator*();
 
   private:
-    T* m_value;
+    ListNode* m_value;
 };
 
 template <typename T>

@@ -142,7 +142,7 @@ size_t Vector<T>::getCapacity()
     return this->m_capacity;
 }
 template <typename T>
-void Vector<T>::insert(TIterator ipos, T element)
+void Vector<T>::insert(TIterator ipos, T& element)
 {
     if (m_size == m_capacity)
     {
@@ -153,9 +153,21 @@ void Vector<T>::insert(TIterator ipos, T element)
     {
         *current = *(current - 1)
     }
+    *ipos = element;
+}
+template <typename T>
+void Vector<T>::insert(TIterator ipos, T&& element)
+{
+    if (m_size == m_capacity)
+    {
+        reserve((1 + m_capacity) * 2);
+    }
 
-    this->m_size++;
-    this->m_data[ipos] = element;
+    for (VectorIterator current = ipos + 1; current != end(); ++current)
+    {
+        *current = *(current - 1)
+    }
+    *ipos = std::move(element);
 }
 
 template <typename T>
@@ -195,9 +207,14 @@ std::ostream& operator<<(std::ostream& os, const Vector<U>& vec)
 }
 
 template <typename T>
-int Vector<T>::pushFront(T element)
+int Vector<T>::pushFront(T& element)
 {
-    insert(0, element);
+    insert(begin(), element);
+}
+template <typename T>
+int Vector<T>::pushFront(T&& element)
+{
+    insert(begin(), element);
 }
 
 template <typename T>
@@ -209,6 +226,11 @@ int Vector<T>::pushBack(T element)
     }
     m_data[m_size] = element;
     m_size++;
+}
+template <typename T>
+int Vector<T>::pushBack(T&& element)
+{
+    m_data[m_size++] = std::move(element);
 }
 
 template <typename T>

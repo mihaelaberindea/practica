@@ -53,4 +53,17 @@ int main()
 
     int prod = pdv::reduce(vec.begin(), vec.end(), 0, [](int a, int b) { return a * b; });
     std::cout << prod << "\n";
+    // TaskScheduler ts(3);
+    // ts.schedule(TaskArgument(2, 3), 2);
+
+    vec.popBack();
+    vec.popBack();
+    vec.popFront();
+    std::cout << "\n";
+
+    std::cout << "erase:\n";
+    list.erase(list.begin());
+    list.erase(list.end());
+    list.erase(list.begin() + 1);
+    std::cout << list;
 }

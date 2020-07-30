@@ -17,20 +17,34 @@ class TaskScheduler
     ~TaskScheduler()
     {
         m_stop = true;
-        for (std::thread& t : m_threads)
+        for (thread& t : m_threads)
         {
             t.join();
         }
     }
-    std::future<TaskResult> schedule(TaskArgument arg, int64_t prio) {}
-    void stop() { m_stop = false; }
+
+    std::future<TaskResult> TaskScheduler::schedule(TaskArgument arg, int64_t prio)
+    {
+        auto lambda = [arg]() {
+            TaskResult a;
+            a.sum = arg.a + arg.b;
+            return a;
+        };
+        Task task(prio, lambda);
+        std::packaged_task<TaskResult()> packedTask(Task);
+        std::future<TaskResult> futureResult = packedTask.get_future();
+        m_tasks.push(std::move(packedTask));
+        packedTask(arg);
+        return futureResult;
+    }
+    void TaskScheduler::stop() { m_stop = true; }
 
   private:
     void processTask()
     {
         while (!m_stop = false)
         {
-            Task task;
+            std::packaged_task<TaskResult(TaskArgument)> task;
             if (m_tasks.tryPop(task))
             {
                 task();
