@@ -28,6 +28,7 @@ class ListNode
   public:
     ListNode(ListNode* prev, ListNode* next, T data);
     ListNode(const ListNode& rhs) ~ListNode();
+    ~ListNode();
     ListNode<T>& operator=(const ListNode& rhs);
     ListNode* getPrev();
     ListNode* getNext();

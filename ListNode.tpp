@@ -1,7 +1,7 @@
 #include "List.hpp"
 #include "ListNode.hpp"
 #include <cstdlib>
-#include <iostream>
+#include <ostream>
 template <typename T>
 ListIterator<T>::ListIterator(ListNode* value)
     : m_value(value)
@@ -87,7 +87,7 @@ ListNode<T>::ListNode(const ListNode& rhs)
 {
     m_prev = rhs.m_prev;
     m_next = rhs.m_next;
-    m_data = rhs.m_data
+    m_data = rhs.m_data;
 }
 template <typename T>
 ListNode<T>::~ListNode()
@@ -125,7 +125,7 @@ void ListNode<T>::setNext(ListNode* next)
     m_next = next;
 }
 template <typename T>
-T& ListNode<T>::getData()
+T ListNode<T>::getData()
 {
     return m_data;
 };
@@ -135,7 +135,7 @@ void ListNode<T>::setData(T data)
     m_data = data;
 }
 template <typename U>
-std::ostream& operator<<(std::ostream& os, const ListNode<U>& vec)
+std::ostream& operator<<(std::ostream& os, const ListNode<U>& ln)
 {
     os << "prev: " << ((ln.m_prev != NULL) ? (ln.m_prev->m_data) : "NULL") << "\n";
     os << "data: " << ln.m_data << "\n";
