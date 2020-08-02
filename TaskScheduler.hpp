@@ -3,6 +3,9 @@
 #include "SynchronizedPriorityQueque.hpp"
 #include "TaskArgument.hpp"
 #include "TaskResult.hpp"
+#include <functional>
+#include <future>
+#include <thread>
 class TaskScheduler
 {
   public:
@@ -17,9 +20,9 @@ class TaskScheduler
     ~TaskScheduler()
     {
         m_stop = true;
-        for (thread& t : m_threads)
+        for (std::size_t cnt = 0; cnt < m_threads.getSize(); ++cnt)
         {
-            t.join();
+            m_threads[cnt].join();
         }
     }
 
@@ -30,12 +33,13 @@ class TaskScheduler
             a.sum = arg.a + arg.b;
             return a;
         };
-        Task task(prio, lambda);
-        std::packaged_task<TaskResult()> packedTask(Task);
-        std::future<TaskResult> futureResult = packedTask.get_future();
-        m_tasks.push(std::move(packedTask));
-        packedTask(arg);
-        return futureResult;
+
+        std::packaged_task<TaskResult()> packagedTask(lambda);
+        std::future<TaskResult> futureRes = packagedTask.get_future();
+        Task task(prio, std::move(packagedTask));
+        m_tasks.push(std::move(task));
+
+        return futureRes;
     }
     void TaskScheduler::stop() { m_stop = true; }
 
@@ -44,10 +48,10 @@ class TaskScheduler
     {
         while (!m_stop = false)
         {
-            std::packaged_task<TaskResult(TaskArgument)> task;
-            if (m_tasks.tryPop(task))
+            Task tsk;
+            if (m_tasks.tryPop(tsk))
             {
-                task();
+                tsk();
             }
         }
     }
