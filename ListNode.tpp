@@ -1,80 +1,6 @@
-#include "List.hpp"
 #include "ListNode.hpp"
 #include <cstdlib>
 #include <ostream>
-template <typename T>
-ListIterator<T>::ListIterator(ListNode* value)
-    : m_value(value)
-{
-}
-template <typename T>
-ListIterator<T>::ListIterator(const ListIterator& rhs)
-{
-    m_value = rhs.m_value;
-}
-template <typename T>
-ListIterator<T>& ListIterator<T>::operator=(const ListIterator& rhs)
-{
-    return m_value = rhs.m_value;
-    return *this;
-}
-template <typename T>
-bool ListIterator<T>::operator!=(const ListIterator& rhs)
-{
-    return m_value != rhs.m_value;
-}
-template <typename T>
-bool ListIterator<T>::operator<(const ListIterator& rhs)
-{
-    if (m_value < rhs.m_value)
-        return m_value;
-    else
-        return rhs.m_value;
-}
-template <typename T>
-ListIterator<T>& ListIterator<T>::operator++()
-{
-    return ++m_value;
-    return *this;
-}
-template <typename T>
-ListIterator<T>& ListIterator<T>::operator--()
-{
-    return --m_value;
-    return *this;
-}
-template <typename T>
-ListIterator<T>& ListIterator<T>::operator+=(std::size_t difference)
-{
-    return m_value += difference;
-    return *this;
-}
-template <typename T>
-ListIterator<T>& ListIterator<T>::operator-=(std::size_t difference)
-{
-    return m_value -= difference;
-    return *this;
-}
-template <typename T>
-ListIterator<T>& ListIterator<T>::operator+(std::size_t difference)
-{
-    ListIterator<T> it;
-    it = m_value + difference;
-    return it;
-}
-template <typename T>
-ListIterator<T>& ListIterator<T>::operator-(std::size_t difference)
-{
-    ListIterator<T> it;
-    it = m_value - difference;
-    return it;
-}
-template <typename T>
-T& ListIterator<T>::operator*()
-{
-    return *m_value;
-}
-
 template <typename T>
 ListNode<T>::ListNode(ListNode* prev, ListNode* next, T data)
 {
@@ -105,12 +31,12 @@ ListNode<T>& ListNode<T>::operator=(const ListNode& rhs)
     return *this;
 }
 template <typename T>
-T& getPrev()
+ListNode<T>* ListNode<T>::getPrev()
 {
     return m_prev;
 }
 template <typename T>
-ListNode& ListNode<T>::getNext()
+ListNode<T>* ListNode<T>::getNext()
 {
     return m_next;
 }
@@ -130,9 +56,11 @@ T ListNode<T>::getData()
     return m_data;
 };
 template <typename T>
-void ListNode<T>::setData(T data)
+void ListNode<T>::setData(ListNode* data)
 {
-    m_data = data;
+    m_data = data->m_data;
+    m_prev = data->m_prev;
+    m_next = data->m_next;
 }
 template <typename U>
 std::ostream& operator<<(std::ostream& os, const ListNode<U>& ln)

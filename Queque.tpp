@@ -1,7 +1,6 @@
 #include "Queque.hpp"
 #include <cstdlib>
 #include <iostream>
-using TIterator = typename TContainer::TIterator;
 template <typename T, typename Tcontainer>
 Queque<T, Tcontainer>::Queque()
 {
@@ -16,12 +15,12 @@ Queque<T, Tcontainer>::~Queque()
 {
 }
 template <typename T, typename TContainer>
-Queue<T, TContainer>& Queue<T, TContainer>::operator=(const Queue& rhs)
+Queque<T, TContainer>& Queque<T, TContainer>::operator=(const Queque& rhs)
 {
     m_container = rhs.m_container;
 }
 template <typename U, template <typename> typename UTContainer>
-std::ostream& operator<<(std::ostream& os, const Queue<U, UTContainer>& myq)
+std::ostream& operator<<(std::ostream& os, const Queque<U, UTContainer>& myq)
 {
     os << myq.m_container;
     return os;

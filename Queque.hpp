@@ -2,6 +2,7 @@
 #define Queque_HPP
 #include <cstddef>
 #include <cstdlib>
+#include <ostream>
 template <typename T, typename Tcontainer>
 class Queque
 {
@@ -10,9 +11,9 @@ class Queque
   public:
     Queque();
     Queque(const Queque& rhs);
-    ~Queque() Queue<T, TContainer>& operator=(const Queue& rhs);
+    ~Queque() Queque<T, TContainer>& operator=(const Queque& rhs);
     template <typename U, template <typename> typename UTContainer>
-    friend std::ostream& operator<<(std::ostream& os, const Queue<U, UTContainer>& myq);
+    friend std::ostream& operator<<(std::ostream& os, const Queque<U, UTContainer>& myq);
     size_t getSize();
     void push(T element);
     T pop(T element);
@@ -25,4 +26,4 @@ class Queque
     Tcontainer m_container;
 };
 #endif
-//#include "Queque.tpp"
+#include "Queque.tpp"

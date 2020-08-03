@@ -1,29 +1,9 @@
 #pragma once
 #ifndef LIST_HPP
 #define LIST_HPP
+#include "ListIterator.hpp"
 #include "ListNode.hpp"
 #include <cstddef>
-template <typename T>
-class ListIterator
-{
-  public:
-    ListIterator(ListNode* value);
-    ListIterator(const ListIterator& rhs);
-    ListIterator<T>& operator=(const ListIterator& rhs);
-    bool operator!=(const ListIterator& rhs);
-    bool operator<(const ListIterator& rhs);
-    ListIterator<T>& operator++();
-    ListIterator<T>& operator--();
-    ListIterator<T>& operator+=(std::size_t difference);
-    ListIterator<T>& operator-=(std::size_t difference);
-    ListIterator<T>& operator+(std::size_t difference);
-    ListIterator<T>& operator-(std::size_t difference);
-    T& operator*();
-
-  private:
-    ListNode* m_value;
-};
-
 template <typename T>
 class List
 {
@@ -54,9 +34,9 @@ class List
     ListIterator<T> end();
 
   private:
-    size_t m_size;
-    ListNode* m_head;
-    ListNode* m_tail;
+    std::size_t m_size;
+    ListNode<T>* m_head;
+    ListNode<T>* m_tail;
 };
 #endif
 #include "List.tpp"
