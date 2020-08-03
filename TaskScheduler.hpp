@@ -1,11 +1,15 @@
 #ifndef TASKSCHEDULER_HPP
 #define TASKSCHEDULER_HPP
-#include "SynchronizedPriorityQueque.hpp"
-#include "TaskArgument.hpp"
-#include "TaskResult.hpp"
-#include <functional>
-#include <future>
+#include <cstddef>
 #include <thread>
+#include <mutex>
+#include <future>
+#include <functional>
+#include <iostream>
+
+#include "TaskScheduler.hpp"
+#include "SynchPriorityQueue.hpp"
+#include "Task.hpp"
 class TaskScheduler
 {
   public:
@@ -46,7 +50,7 @@ class TaskScheduler
   private:
     void processTask()
     {
-        while (!m_stop = false)
+        while (m_stop != true)
         {
             Task tsk;
             if (m_tasks.tryPop(tsk))

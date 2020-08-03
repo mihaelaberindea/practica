@@ -53,16 +53,16 @@ T SynchronizedPriorityQueue<T, TContainer, TLock>::pop(T element)
     std::lock_guard<std::mutex> guard(m_lock);
     T element = m_container.getBack();
     m_container.popBack();
-    m_lock.unlock();
     return element;
 }
 template <typename T, typename TContainer, typename TLock>
 bool SynchronizedPriorityQueue<T, TContainer, TLock>::tryPop(T& value)
 {
     std::lock_guard<std::mutex> guard(m_lock);
-    if (!m_container = isEmpty())
+    if (!m_container.isEmpty())
     {
-        value = m_container.pop();
+        value = m_container.getBack();
+        m_container.popBack();
         return true;
     }
     return false;
@@ -84,11 +84,11 @@ template <typename T, typename TContainer, typename TLock>
 TIterator begin()
 {
     std::lock_guard<std::mutex> guard(m_lock);
-    return TIterator<T>(m_container);
+    return m_container.begin();
 }
 template <typename T, typename TContainer, typename TLock>
 TIterator end()
 {
     std::lock_guard<std::mutex> guard(m_lock);
-    return TIterator<T>(m_container + m_size);
+    return m_container.end();
 }

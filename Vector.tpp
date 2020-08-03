@@ -153,7 +153,8 @@ void Vector<T>::insert(TIterator ipos, T& element)
     {
         *current = *(current - 1)
     }
-    *ipos = element;
+     this->m_size++;
+     this->m_data[ipos] = element;
 }
 template <typename T>
 void Vector<T>::insert(TIterator ipos, T&& element)
@@ -167,7 +168,8 @@ void Vector<T>::insert(TIterator ipos, T&& element)
     {
         *current = *(current - 1)
     }
-    *ipos = std::move(element);
+      this->m_size++;
+      *ipos = std::move(element);
 }
 
 template <typename T>
@@ -286,7 +288,6 @@ void Vector<T>::erase(VectorIterator pos)
     {
         VectorIterator next = current;
         ++next;
-
         current = next;
     }
 }
