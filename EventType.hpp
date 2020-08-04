@@ -2,6 +2,9 @@
 #define EVENTTYPE_HPP
 enum eventType
 {
-
+    Suspend,
+    Resume,
+    ShutDown,
+    TurnOn
 };
 #endif

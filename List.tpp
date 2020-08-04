@@ -10,13 +10,13 @@ List<T>::List()
     m_head = NULL;
 }
 template <typename T>
-List<T>::List(const List& rhs)
+List<T>::List(const List &rhs)
 {
     m_size = 0;
     m_head = NULL;
     m_tail = NULL;
 
-    ListNode<T>* p = rhs.m_head;
+    ListNode<T> *p = rhs.m_head;
     while (p != NULL)
     {
         pushBack(p->getData());
@@ -26,8 +26,10 @@ List<T>::List(const List& rhs)
     return *this;
 }
 template <typename T>
-List<T>::List(List&& rhs)
+List<T>::List(List &&rhs)
 {
+    m_size = rhs.m_size;
+    rhs.m_size = 0;
     m_head = rhs.m_head;
     rhs.m_head = nullptr;
     m_tail = rhs.m_tail;
@@ -39,38 +41,59 @@ size_t List<T>::getSize()
     return m_size;
 }
 template <typename T>
-void List<T>::insert(std::size_t idx, T element)
+void List<T>::insert(TIterator pos, const T &element)
 {
-    ListNode* node = new ListNode(NULL, NULL, element);
-
-    ListNode* p = m_head;
-    if (idx == 0)
+    if (!(pos != begin()))
     {
         pushFront(element);
+        return;
     }
-    if (idx == m_size)
+    if (!(pos != end()))
     {
         pushBack(element);
+        return;
     }
-    while (idx)
-    {
-        p = p->getNext();
-        --idx;
-    }
+
+    ListNode<T> *node = new ListNode<T>(NULL, NULL, element);
+    ListNode<T> *p = pos.get_m_value();
 
     p->getPrev()->setNext(node);
     node->setPrev(p->getPrev());
     p->setPrev(node);
     node->setNext(p);
-    m_size++;
 
-    return *this;
-};
+    ++m_size;
+}
 
 template <typename T>
-void List<T>::pushFront(T element)
+void List<T>::insert(TIterator pos, T &&element)
 {
-    ListNode* node = new ListNode(NULL, NULL, element);
+    if (!(pos != begin()))
+    {
+        pushFront(std::move(element));
+        return;
+    }
+    if (!(pos != end()))
+    {
+        pushBack(std::move(element));
+        return;
+    }
+
+    ListNode<T> *node = new ListNode<T>(nullptr, nullptr, std::move(element));
+    ListNode<T> *p = pos.get_m_value();
+
+    p->getPrev()->setNext(node);
+    node->setPrev(p->getPrev());
+    p->setPrev(node);
+    node->setNext(p);
+
+    ++m_size;
+}
+
+template <typename T>
+void List<T>::pushFront(const T &element)
+{
+    ListNode<T> *node = new ListNode(nullptr, nullptr, element);
 
     if (m_head == NULL)
     {
@@ -85,7 +108,24 @@ void List<T>::pushFront(T element)
     m_size++;
 }
 template <typename T>
-void List<T>::pushBack(T element)
+void List<T>::pushFront(T&& element)
+{
+    ListNode<T>* node = new ListNode<T>(nullptr, nullptr, std::move(element));
+
+    if (m_head == NULL)
+    {
+        m_head = m_tail = node;
+    }
+    else
+    {
+        node->setNext(m_head);
+        m_head->setPrev(node);
+        m_head = node;
+    }
+    ++m_size;
+}
+template <typename T>
+void List<T>::pushBack(const T& element)
 {
     ListNode* node = new ListNode(NULL, NULL, element);
     ListNode* p = m_head;
@@ -104,14 +144,74 @@ void List<T>::pushBack(T element)
     m_size++;
 }
 template <typename T>
-int List<T>::getFront()
+void List<T>::pushBack(T&& element)
+{
+    ListNode<T>* node = new ListNode<T>(NULL, NULL, std::move(element));
+    if (m_head == NULL)
+    {
+        m_head = m_tail = node;
+        return;
+    }
+
+    m_tail->setNext(node);
+    node->setPrev(m_tail);
+    m_tail = node;
+
+    ++m_size;
+}
+template <typename T>
+void List<T>::erase(TIterator pos)
+{
+    ListNode<T>* p = m_head;
+    if (!(pos != begin()))
+    {
+        popFront();
+        return;
+    }
+    if (!(pos != end()))
+    {
+        popBack();
+        return;
+    }
+    while (pos != begin())
+    {
+        p = p->getNext();
+        --pos;
+    }
+
+    delete p;
+    --m_size;
+}
+
+template <typename T>
+T &List<T>::getFront()
 {
     return m_head->getData();
 }
 template <typename T>
-T List<T>::getBack()
+T &List<T>::getBack()
 {
     return m_tail->getData();
+}
+template <typename T>
+void List<T>::popFront()
+{
+    ListNode<T>* p = m_head;
+    m_head = m_head->getNext();
+    delete p;
+    --m_size;
+}
+
+template <typename T>
+void List<T>::popBack()
+{
+    if (m_head != NULL)
+    {
+        ListNode<T>* p = m_tail;
+        m_tail = m_tail->getPrev();
+        delete p;
+        --m_size;
+    }
 }
 template <typename T>
 T& List<T>::operator[](std::size_t idx)

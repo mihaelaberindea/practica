@@ -61,7 +61,7 @@ bool SynchronizedPriorityQueue<T, TContainer, TLock>::tryPop(T &value)
     std::lock_guard<std::mutex> guard(m_lock);
     if (!m_container.isEmpty())
     {
-        value = m_container.getBack();
+        value = std::move(m_container.getBack());
         m_container.popBack();
         return true;
     }

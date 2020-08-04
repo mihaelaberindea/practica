@@ -1,10 +1,22 @@
+#include "Algorithms.hpp"
 #include "List.hpp"
 #include "ListNode.hpp"
+#include "PriorityQueue.hpp"
+#include "Queue.hpp"
+#include "SynchronizedPriorityQueue.hpp"
+#include "Task.hpp"
+#include "TaskScheduler.hpp"
 #include "Vector.hpp"
-#include <cstdlib>
+#include <iostream>
 
 int main()
 {
+    TaskScheduler scheduler(5);
+
+    TaskArgument arg(1, 2);
+    auto future = scheduler.schedule(arg, 0);
+
+    std::cout << future.get().sum << std::endl;
     /* Vector<int> vec;
     vec.pushBack(0);
     vec.pushBack(1);
@@ -29,7 +41,7 @@ int main()
     list.pushBack(11);
     list.pushFront(13);
     std::cout <<list;
-    */
+    
 
     std::vector<int> src = {1, 2, 3, 4, 5};
     std::vector<int> dst = {0, 0, 0, 0, 0};
@@ -53,9 +65,7 @@ int main()
 
     int prod = pdv::reduce(vec.begin(), vec.end(), 0, [](int a, int b) { return a * b; });
     std::cout << prod << "\n";
-    // TaskScheduler ts(3);
-    // ts.schedule(TaskArgument(2, 3), 2);
-
+    
     vec.popBack();
     vec.popBack();
     vec.popFront();
@@ -66,4 +76,6 @@ int main()
     list.erase(list.end());
     list.erase(list.begin() + 1);
     std::cout << list;
+    */
+
 }

@@ -18,18 +18,24 @@ set(HEADERS
 	include/VectorIteraror.hpp
     include/ListIterator.hpp
     include/SynchronizedPriorityQueque.hpp
+    include/TaskArgument.hpp
+	include/TaskResult.hpp
+	include/TaskScheduler.hpp
+	include/Functional.hpp
 )
 
 set(INCLUDE_DIRECTORIES
     PUBLIC include/
 )
 set(CMAKE_CXX_COMPILER g++)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20 -Wall -Wextra -Wpedantic -Werror -fsanitize=address -g")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++2a -Wall -Wextra -Wpedantic -Werror -fsanitize=address -g")
 
 ### Main Target ###
 
-add_executable(${PROJECT_NAME} ${SOURCES})
-target_include_directories(${PROJECT_NAME} ${INCLUDE_DIRECTORIES})
+add_executable(Release ${SOURCES})
+target_include_directories(Release ${INCLUDE_DIRECTORIES})
+target_compile_options(Release PRIVATE -std=c++2a -O3 -Wall -Wextra -Wpedantic -Werror -lpthread)
+target_link_libraries(Release -lpthread)
 
 ### Test Targets ###
 

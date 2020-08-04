@@ -32,8 +32,8 @@ class TaskScheduler
     std::future<TaskResult> TaskScheduler::schedule(TaskArgument arg, int64_t prio)
     {
         auto lambda = [arg]() {
-            TaskResult a;
-            a.sum = arg.a + arg.b;
+            TaskResult ts;
+            ts.sum = arg.a + arg.b;
             return a;
         };
 

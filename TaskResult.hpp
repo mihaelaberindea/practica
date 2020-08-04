@@ -4,6 +4,7 @@
 class TaskResult
 {
   public:
-    int sum;
+    int sum=0;
+  
 };
 #endif

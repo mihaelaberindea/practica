@@ -51,7 +51,7 @@ void ListNode<T>::setNext(ListNode* next)
     m_next = next;
 }
 template <typename T>
-T ListNode<T>::getData()
+T &ListNode<T>::getData()
 {
     return m_data;
 };

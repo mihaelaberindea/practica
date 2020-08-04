@@ -7,21 +7,22 @@ TOutputIt copy(TInputIt first, TInputIt last, TOutputIt output)
 {
     for (TInputIt it = first; it != last; ++it)
     {
-        *ouput++ = *it;
+        *output++ = *it;
     }
-    return ouput;
+    return output;
 }
 template <typename TInputIt, typename TOutputIt, typename TPredicate>
 TOutputIt copyIf(TInputIt first, TInputIt last, TPredicate pred)
 {
-    for (TInputIt it = first; it != last; ++it)
+    for (; first != last; ++first)
     {
-        if (pred(*it) == true)
+        if (pred(*first))
         {
-            *ouput++ = *it;
+            *output = *first;
+            ++output;
         }
     }
-    return ouput;
+    return output;
 }
 template <typename TInputIt, typename T>
 TInputIt find(TInputIt first, TInputIt last, T value)

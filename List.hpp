@@ -8,30 +8,35 @@ template <typename T>
 class List
 {
   public:
+    using TIterator = ListIterator<T>;
+
     List();
-    List(const List& rhs);
-    List(List&& rhs);
+    List(const List &rhs);
+    List(List &&rhs);
     ~List();
-    List<T>& operator=(const List& rhs);
-    const T& operator[](std::size_t idx) const; // erase
-    T& operator[](std::size_t idx);             // setElement
+    List<T> &operator=(const List<T> &rhs);
+    const T &operator[](std::size_t idx) const; // erase
+    T &operator[](std::size_t idx);             // setElement
     size_t getSize();
-    void insert(std::size_t idx, T element);
-    void pushFront(T element);
-    void pushBack(T element);
-    T getElement(std::size_t idx);
-    int getFront();
-    T getBack();
+    void insert(TIterator pos, const T& element);
+    void insert(TIterator pos, T&& element);
+    void pushFront(const T& element);
+    void pushFront(T&& element);
+    T &getFront();
+    T &getBack();
+    void pushBack(const T& element);
+    void pushBack(T&& element);
+    void erase(TIterator pos);
     void popFront();
     void popBack();
     void setFront(T element);
     void setBack(T element);
     template <typename U>
-    friend std::ostream& operator<<(std::ostream& os, const List<U>& vec);
+    friend std::ostream& operator<<(std::ostream &os, const List<U> &vec);
     void clear();
     bool isEmpty();
-    ListIterator<T> begin();
-    ListIterator<T> end();
+    TIterator begin();
+    TIterator end();
 
   private:
     std::size_t m_size;
