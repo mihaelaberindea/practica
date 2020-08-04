@@ -14,12 +14,11 @@ class Task
     Task();
     Task(int64_t prio, std::packaged_task<TaskResult()> &&func);
     void operator()();
-    bool operator<(const Task& rhs);
+    bool operator<(const Task &rhs);
     std::int64_t getPriority();
-    std::function<TaskResult()> get_m_function();
     friend std::ostream &operator<<(std::ostream &os, const Task &task);
   private:
-    function<void()> m_function;
+    Function<void()> m_function;
     int64_t m_priority;
 };
 #include "Task.tpp"

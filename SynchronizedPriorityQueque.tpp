@@ -5,7 +5,7 @@ SyncronizedPriorityQueque<T, TContainer, TLock>::SynchronizedPriorityQueque()
 {
 }
 template <typename T, typename TContainer, typename TLock>
-SynchronizedPriorityQueque<T, TContainer, TLock>::SynchronizedPriorityQueque(const SynchronizedPriorityQueque& rhs)
+SynchronizedPriorityQueque<T, TContainer, TLock>::SynchronizedPriorityQueque(const SynchronizedPriorityQueque &rhs)
 {
     std::lock_guard<std::mutex> guard(m_lock);
     m_container = rhs.m_container;
@@ -15,14 +15,14 @@ SynchronizedPriorityQueue<T, TContainer, TLock>::~SynchronizedPriorityQueue()
 {
 }
 template <typename T, typename TContainer, typename Tlock>
-SynchronizedPriorityQueue<T, TContainer, TLock>& SynchronizedPriorityQueue<T, TContainer, TLock>::operator=(
+SynchronizedPriorityQueue<T, TContainer, TLock> &SynchronizedPriorityQueue<T, TContainer, TLock>::operator=(
     const SynchronizedPriorityQueue& rhs)
 {
     std::lock_guard<std::mutex> guard(m_lock);
     m_container = rhs.m_container;
 }
 template <typename U, typename UTContainer>
-std::ostream& operator<<(std::ostream& os, const SynchronizedPriorityQueue<U, UTContainer, UTLock>& sprioq)
+std::ostream& operator<<(std::ostream &os, const SynchronizedPriorityQueue<U, UTContainer, UTLock> &sprioq)
 {
     os << q.m_container;
     return os;
@@ -56,7 +56,7 @@ T SynchronizedPriorityQueue<T, TContainer, TLock>::pop(T element)
     return element;
 }
 template <typename T, typename TContainer, typename TLock>
-bool SynchronizedPriorityQueue<T, TContainer, TLock>::tryPop(T& value)
+bool SynchronizedPriorityQueue<T, TContainer, TLock>::tryPop(T &value)
 {
     std::lock_guard<std::mutex> guard(m_lock);
     if (!m_container.isEmpty())
