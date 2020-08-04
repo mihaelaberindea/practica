@@ -7,8 +7,7 @@
 #include <functional>
 #include <iostream>
 
-#include "TaskScheduler.hpp"
-#include "SynchPriorityQueue.hpp"
+#include "SynchronizedPriorityQueque.hpp"
 #include "Task.hpp"
 class TaskScheduler
 {
