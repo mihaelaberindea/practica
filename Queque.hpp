@@ -3,27 +3,32 @@
 #include <cstddef>
 #include <cstdlib>
 #include <ostream>
-template <typename T, typename Tcontainer>
+template <typename T, typename TContainer>
 class Queque
 {
-    using TIterator = typename TContainer::TIterator;
+   public:
+     //using TIterator = typename TContainer::TIterator;
 
-  public:
-    Queque();
-    Queque(const Queque& rhs);
-    ~Queque() Queque<T, TContainer>& operator=(const Queque& rhs);
-    template <typename U, template <typename> typename UTContainer>
-    friend std::ostream& operator<<(std::ostream& os, const Queque<U, UTContainer>& myq);
-    size_t getSize();
-    void push(T element);
-    T pop(T element);
-    void clear();
-    bool isEmpty();
-    TIterator begin();
-    TIterator end();
+     Queque();
+     Queque(const Queque& rhs);
+     ~Queque();
+     Queque<T, TContainer>& operator=(const Queque& rhs);
 
-  private:
-    Tcontainer m_container;
+     template <typename U, typename UTContainer>
+     friend std::ostream& operator<<(std::ostream& os, const Queque<U, UTContainer>& myq);
+     
+     size_t getSize();
+     void push(T element);
+     T pop(T element);
+     void clear();
+     bool isEmpty();
+     typename TContainer<T>::TIterator begin();
+     typename TContainer<T>::TIterator end();
+     //TIterator begin();
+     //TIterator end();
+
+   private:
+     TContainer m_container;
 };
-#endif
 #include "Queque.tpp"
+#endif

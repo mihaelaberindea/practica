@@ -93,7 +93,7 @@ void List<T>::insert(TIterator pos, T &&element)
 template <typename T>
 void List<T>::pushFront(const T &element)
 {
-    ListNode<T> *node = new ListNode(nullptr, nullptr, element);
+    ListNode<T> *node = new ListNode<T>(nullptr, nullptr, element);
 
     if (m_head == NULL)
     {
@@ -127,8 +127,8 @@ void List<T>::pushFront(T&& element)
 template <typename T>
 void List<T>::pushBack(const T& element)
 {
-    ListNode* node = new ListNode(NULL, NULL, element);
-    ListNode* p = m_head;
+    ListNode<T>* node = new ListNode<T>(NULL, NULL, element);
+    ListNode<T>* p = m_head;
     if (m_head == NULL)
     {
         m_head = m_tail = node;
@@ -251,8 +251,16 @@ bool List<T>::isEmpty()
 template <typename T>
 List<T>::~List()
 {
-    delete[] m_data;
-    m_data = nulptr;
+    ListNode<T> *current = m_head;
+    ListNode<T> *next;
+    while (current != NULL)
+    {
+        next = current->getNext();
+        delete current;
+        current = next;
+    }
+    m_head = NULL;
+    m_tail = NULL;
 }
 template <typename T>
 ListIterator<T> List<T>::begin()
