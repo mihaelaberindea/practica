@@ -9,18 +9,18 @@
 class EventManager
 {
   public:
-    void subscribe(EventType type, THandler handler)
+    void subscribe(EventType eventType, THandler handler)
     {
-        if(!m_handlers.contains(type) 
+        if(!m_handlers.contains(eventType) 
         {
-            m_handlers[type] = {};
+            m_handlers[eventType] = {};
         }
 
-        m_handlers[type].push_back(handler);
+        m_handlers[eventType].push_back(handler);
     }
-    void fire(EventType type, EventPayload payload)
+    void fire(EventType eventType, EventPayload payload)
     {
-        for (auto& handler : m_handlers[type])
+        for (auto& handler : m_handlers[eventType])
         {
             handler(payload);
         }
