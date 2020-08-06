@@ -2,7 +2,13 @@
 #define EVENTPAYLOAD_HPP
 class EventPayload
 {
-    public:
-
+    int status;
+    int pause;
+  public:
+     EventPayload(int w, int nw)
+     {
+       this->status=w;
+       this->pause=nw;
+     }
 };
 #endif

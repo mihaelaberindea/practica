@@ -4,19 +4,19 @@
 #include "EventType.hpp"
 #include "Vector.hpp"
 #include <functional>
-#include <iostream>
+#include <map>
 
 class EventManager
 {
   public:
     void subscribe(EventType eventType, THandler handler)
     {
-        if(!m_handlers.contains(eventType) 
+        if(!m_handlers.contains(eventType))
         {
             m_handlers[eventType] = {};
         }
 
-        m_handlers[eventType].push_back(handler);
+        m_handlers[eventType].pushBack(handler);
     }
     void fire(EventType eventType, EventPayload payload)
     {
@@ -28,6 +28,6 @@ class EventManager
 
   private:
     std::function<void(const EventPayload&)> THandler;
-    map<EventType, vector<THandler>> m_handlers;
+    std::map <EventType, Vector<THandler>>::contains m_handlers;
 };
 #endif
