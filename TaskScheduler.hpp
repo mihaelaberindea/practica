@@ -26,10 +26,10 @@ class TaskScheduler
     {
         while (!m_stop)
         {
-            Task popRez;
-            if (m_tasks.tryPop(popRez))
+            Task ts;
+            if (m_tasks.tryPop(ts))
             {
-                popRez();
+                ts();
             }
         }
     }
