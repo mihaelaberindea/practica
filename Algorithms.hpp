@@ -12,7 +12,7 @@ TOutputIt copy(TInputIt first, TInputIt last, TOutputIt output)
     return output;
 }
 template <typename TInputIt, typename TOutputIt, typename TPredicate>
-TOutputIt copyIf(TInputIt first, TInputIt last, TPredicate pred)
+TOutputIt copyIf(TInputIt first, TInputIt last, TOutputIt output, TPredicate pred)
 {
     for (; first != last; ++first)
     {

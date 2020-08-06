@@ -1,65 +1,39 @@
 #ifndef TASKSCHEDULER_HPP
 #define TASKSCHEDULER_HPP
-#include <cstddef>
-#include <thread>
-#include <mutex>
-#include <future>
-#include <functional>
-#include <iostream>
-
-#include "SynchronizedPriorityQueque.hpp"
+#include "SynchronizedPriorityQueue.hpp"
 #include "Task.hpp"
+#include "Vector.hpp"
+#include <atomic>
+#include <future>
+#include <iostream>
+#include <thread>
+
 class TaskScheduler
 {
   public:
-    TaskScheduler(size_t count)
-    {
-        m_stop = false;
-        for (std::idx = 0; idx < count; ++idx)
-        {
-            m_threads.pushBack(std::thread(&TaskScheduler::processTask, this));
-        }
-    }
-    ~TaskScheduler()
-    {
-        m_stop = true;
-        for (std::size_t cnt = 0; cnt < m_threads.getSize(); ++cnt)
-        {
-            m_threads[cnt].join();
-        }
-    }
+    TaskScheduler(std::size_t count);
+    ~TaskScheduler();
 
-    std::future<TaskResult> TaskScheduler::schedule(TaskArgument arg, int64_t prio)
-    {
-        auto lambda = [arg]() {
-            TaskResult ts;
-            ts.sum = arg.a + arg.b;
-            return a;
-        };
-
-        std::packaged_task<TaskResult()> packagedTask(lambda);
-        std::future<TaskResult> futureRes = packagedTask.get_future();
-        Task task(prio, std::move(packagedTask));
-        m_tasks.push(std::move(task));
-
-        return futureRes;
-    }
-    void TaskScheduler::stop() { m_stop = true; }
+    std::future<TaskResult> schedule(TaskArgument arg, std::int64_t prio);
+    void stop();
 
   private:
-    void processTask()
+    SPriorityQueue<Task> m_tasks;
+    Vector<std::thread> m_threads;
+    std::atomic<bool> m_stop;
+
+    void processTasks()
     {
-        while (m_stop != true)
+        while (!m_stop)
         {
-            Task tsk;
-            if (m_tasks.tryPop(tsk))
+            Task popRez;
+            if (m_tasks.tryPop(popRez))
             {
-                tsk();
+                popRez();
             }
         }
     }
-    SynchronizedPriorityQueque<packaged_task<Task>> m_tasks;
-    Vector<thread> m_threads;
-    std::atomic<bool> m_stop;
 };
-#endif
+
+#include "TaskScheduler.tpp"
+#endif // TASKSCHEDULER_HPP

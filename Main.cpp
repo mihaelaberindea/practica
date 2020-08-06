@@ -2,80 +2,89 @@
 #include "List.hpp"
 #include "ListNode.hpp"
 #include "PriorityQueque.hpp"
-#include "Queque.hpp"
-#include "SynchronizedPriorityQueque.hpp"
+#include "Queue.hpp"
+#include "SynchronizedPriorityQueue.hpp"
 #include "Task.hpp"
 #include "TaskScheduler.hpp"
 #include "Vector.hpp"
 #include <iostream>
-
-int main()
+void testTaskScheduler()
 {
-    TaskScheduler scheduler(5);
+    TaskScheduler scheduler(4);
 
     TaskArgument arg(1, 2);
-    auto future = scheduler.schedule(arg, 0);
+    TaskArgument arg1(2, 2);
 
-    std::cout << future.get().sum << std::endl;
-    /* Vector<int> vec;
-    vec.pushBack(0);
-    vec.pushBack(1);
-    vec.pushBack(2);
-    vec.pushBack(3);
-    vec.pushBack(4);
-    vec.pushFront(5);
+    auto future1 = scheduler.schedule(arg, 0);
+    auto future2 = scheduler.schedule(arg1, 1);
 
-    std::cout << vec[0] << std::endl;
-    std::cout << vec[1] << std::endl;
-    std::cout << vec[2] << std::endl;
+    std::cout << future1.get().sum << std::endl;
+    std::cout << future2.get().sum << std::endl;
 
-    Queue<int, List> myq;
-    myq.push(6);
-    myq.push(7);
-    myq.push(8);
-    myq.pop();
-    std::cout << myq;
+    scheduler.stop();
+};
+    int main()
+    {
+        testTaskScheduler();
 
-    List<int> list;
-    list.pushBack(10);
-    list.pushBack(11);
-    list.pushFront(13);
-    std::cout <<list;
-    
+        /* Vector<int> vec;
+        vec.pushBack(0);
+        vec.pushBack(1);
+        vec.pushBack(2);
+        vec.pushBack(3);
+        vec.pushBack(4);
+        vec.pushFront(5);
 
-    std::vector<int> src = {1, 2, 3, 4, 5};
-    std::vector<int> dst = {0, 0, 0, 0, 0};
+        std::cout << vec[0] << std::endl;
+        std::cout << vec[1] << std::endl;
+        std::cout << vec[2] << std::endl;
 
-    copy(src.begin(), dst.begin());
+        Queue<int, List> myq;
+        myq.push(6);
+        myq.push(7);
+        myq.push(8);
+        myq.pop();
+        std::cout << myq;
 
-    std::vector<int> vec;
-    sort(vec.begin(), vec.end(), [](int lhs, int rhs) { return lhs < rhs; })
+        List<int> list;
+        list.pushBack(10);
+        list.pushBack(11);
+        list.pushFront(13);
+        std::cout <<list;
 
-        transform(vec.begin(), vec.end(), [](int value) { return value * 2; })
 
-            Vector<int>
-                vec1;
-    vec1.resize(10);
+        std::vector<int> src = {1, 2, 3, 4, 5};
+        std::vector<int> dst = {0, 0, 0, 0, 0};
 
-    pdv::transform(vec.begin(), vec.end(), vec1.begin(), [](int a) { return ++a; });
-    std::cout << vec1 << "\n";
+        copy(src.begin(), dst.begin());
 
-    int sum = pdv::reduce(vec.begin(), vec.end(), 0, [](int a, int b) { return a + b; });
-    std::cout << sum << "\n";
+        std::vector<int> vec;
+        sort(vec.begin(), vec.end(), [](int lhs, int rhs) { return lhs < rhs; })
 
-    int prod = pdv::reduce(vec.begin(), vec.end(), 0, [](int a, int b) { return a * b; });
-    std::cout << prod << "\n";
-    
-    vec.popBack();
-    vec.popBack();
-    vec.popFront();
-    std::cout << "\n";
+            transform(vec.begin(), vec.end(), [](int value) { return value * 2; })
 
-    std::cout << "erase:\n";
-    list.erase(list.begin());
-    list.erase(list.end());
-    list.erase(list.begin() + 1);
-    std::cout << list;
-    */
+                Vector<int>
+                    vec1;
+        vec1.resize(10);
 
-}
+        pdv::transform(vec.begin(), vec.end(), vec1.begin(), [](int a) { return ++a; });
+        std::cout << vec1 << "\n";
+
+        int sum = pdv::reduce(vec.begin(), vec.end(), 0, [](int a, int b) { return a + b; });
+        std::cout << sum << "\n";
+
+        int prod = pdv::reduce(vec.begin(), vec.end(), 0, [](int a, int b) { return a * b; });
+        std::cout << prod << "\n";
+
+        vec.popBack();
+        vec.popBack();
+        vec.popFront();
+        std::cout << "\n";
+
+        std::cout << "erase:\n";
+        list.erase(list.begin());
+        list.erase(list.end());
+        list.erase(list.begin() + 1);
+        std::cout << list;
+        */
+    }
