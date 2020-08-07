@@ -8,7 +8,7 @@ class ListNode
 {
   public:
     
-   ListNode(ListNode* prev, ListNode* next, T&& data);
+   ListNode(ListNode* prev, ListNode* next, T data);
 
     ListNode(const ListNode& rhs);
     ~ListNode();

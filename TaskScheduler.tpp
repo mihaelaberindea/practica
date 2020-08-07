@@ -1,6 +1,7 @@
 #include "SynchronizedPriorityQueue.hpp"
 #include "Task.hpp"
 #include "TaskScheduler.hpp"
+#include "Function.hpp"
 #include <functional>
 #include <future>
 #include <iostream>

@@ -3,9 +3,9 @@
 #include <type_traits>
 
 template <typename T>
-ListNode<T>::ListNode(ListNode* prev, ListNode* next, T&& data)
+ListNode<T>::ListNode(ListNode* prev, ListNode* next, T data)
 {
-    //m_data = std::forward<T>(data);
+   // m_data = std::forward<T>(data);
 
     m_next = next;
     if (m_next != NULL)

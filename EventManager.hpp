@@ -3,6 +3,7 @@
 #include "EventPayload.hpp"
 #include "EventType.hpp"
 #include "Vector.hpp"
+#include <cstddef>
 #include <functional>
 #include <map>
 
