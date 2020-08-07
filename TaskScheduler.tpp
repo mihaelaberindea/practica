@@ -37,11 +37,11 @@ std::future<TaskResult> TaskScheduler::schedule(TaskArgument arg, std::int64_t p
         return trs;
     };
 
-    std::packaged_task<TaskResult()> packedTask(lambda);
+    std::packaged_task<TaskResult()> packagedTask(lambda);
 
-    std::future<TaskResult> futureRes = packedTask.get_future();
+    std::future<TaskResult> futureRes = packagedTask.get_future();
 
-    Task task(prio, std::move(packedTask));
+    Task task(prio, std::move(packagedTask));
 
     m_tasks.push(std::move(task));
 

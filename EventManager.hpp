@@ -28,6 +28,6 @@ class EventManager
 
   private:
     std::function<void(const EventPayload&)> THandler;
-    std::map <EventType, Vector<THandler>>::contains m_handlers;
+    std::map <EventType, Vector<THandler>> m_handlers;
 };
 #endif

@@ -7,8 +7,8 @@ template <typename T>
 class ListNode
 {
   public:
-    template <typename TData>
-    explicit (std::is_same<T, TData>) (ListNode(ListNode* prev, ListNode* next, TData&& data));
+    
+   ListNode(ListNode* prev, ListNode* next, T&& data);
 
     ListNode(const ListNode& rhs);
     ~ListNode();

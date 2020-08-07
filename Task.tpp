@@ -1,10 +1,11 @@
 #include "Task.hpp"
 #include <ostream>
 
-Task::Task(int64_t prio, std::packaged_task<TaskResult()>&& func)
+Task::Task(std::int64_t prio, std::packaged_task<TaskResult()>&& pt)
+    : m_priority(prio)
+    , m_function(std::move(pt))
+
 {
-    m_priority = prio;
-    m_function = std::move(func);
 }
 
 int64_t Task::getPriority() { return m_priority; }

@@ -47,7 +47,9 @@
         "functional": "cpp",
         "iterator": "cpp",
         "ratio": "cpp",
-        "mutex": "cpp"
+        "mutex": "cpp",
+        "map": "cpp",
+        "future": "cpp"
     },
     "editor.formatOnPaste": true,
     "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools"

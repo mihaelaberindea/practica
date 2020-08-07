@@ -11,7 +11,7 @@ class Queue
     Queue();
     Queue(const Queue& rhs);
     ~Queue();
-
+   
     Queue<T, TContainer>& operator=(const Queue& rhs);
 
     size_t getSize();

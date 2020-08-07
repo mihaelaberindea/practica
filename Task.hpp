@@ -14,7 +14,7 @@ class Task
   public:
     Task() = default;
 
-    Task(std::int64_t prio, std::packaged_task<TaskResult()>&& func);
+    Task(std::int64_t prio, std::packaged_task<TaskResult()>&& ppt);
 
     void operator()();
     bool operator<(const Task& rhs);
