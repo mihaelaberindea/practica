@@ -1,31 +1,12 @@
 #include "ListNode.hpp"
 #include <iostream>
-#include <type_traits>
 
 template <typename T>
 ListNode<T>::ListNode(ListNode* prev, ListNode* next, T data)
 {
-   // m_data = std::forward<T>(data);
-
-    m_next = next;
-    if (m_next != NULL)
-    {
-        next->m_prev = this;
-    }
-
+    m_data = data;
     m_prev = prev;
-    if (m_prev != NULL)
-    {
-        prev->m_next = this;
-    }
-}
-
-template <typename T>
-ListNode<T>::ListNode(const ListNode& rhs)
-{
-    m_data = rhs.m_data;
-    m_next = rhs.m_next;
-    m_prev = rhs.m_prev;
+    m_next = next;
 }
 
 template <typename T>

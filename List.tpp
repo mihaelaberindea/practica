@@ -228,7 +228,7 @@ template <typename T>
 void List<T>::pushBack(const T& element)
 {
 
-    ListNode<T>* node = new ListNode<T>(nullptr, nullptr, element);
+    ListNode<T>* node = new ListNode<T>(NULL, NULL, element);
     if (m_head == NULL)
     {
         m_head = m_tail = node;
@@ -247,7 +247,7 @@ void List<T>::pushBack(T&& element)
 {
     ++m_size;
 
-    ListNode<T>* node = new ListNode<T>(nullptr, nullptr, std::move(element));
+    ListNode<T>* node = new ListNode<T> (nullptr, nullptr, std::move(element));
     if (m_head == NULL)
     {
         m_head = m_tail = node;
@@ -415,13 +415,13 @@ bool List<T>::isEmpty()
 }
 
 template <typename T>
-ListIterator<T> List<T>::begin()
+auto List<T>::begin()
 {
-    return ListIterator<T>(m_head);
+    return ListIterator<TValue>(m_head);
 }
 
 template <typename T>
-ListIterator<T> List<T>::end()
+auto List<T>::end()
 {
-    return ListIterator<T>(m_tail) + 1;
+    return ListIterator<TValue>(m_tail);
 }

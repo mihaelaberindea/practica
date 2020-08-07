@@ -49,8 +49,8 @@ class List
     template <typename U>
     friend std::ostream& operator<<(std::ostream& os, const List<U>& vec);
 
-    TIterator begin();
-    TIterator end();
+    auto begin();
+    auto end();
 
   private:
     std::size_t m_size;

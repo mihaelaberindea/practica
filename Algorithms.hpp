@@ -99,14 +99,11 @@ void sort(TInputIt first, TInputIt last, TComparator comp)
 template <typename TLhsInputIt, typename TRhsInputIt>
 bool equal(TLhsInputIt lhsFirst, TLhsInputIt lhsLast, TRhsInputIt rhsFirst)
 {
-    for (TLhsInputIt il = lhsFirst; il != rhsFirst; ++il)
+    for (; lhsFirst != lhsLast; ++lhsFirst)
     {
-        for (TRhsInputIt ir = rhsFirst; ir != lhsFirst; ++ir)
+        if (!(*lhsFirst == *(++rhsFirst)))
         {
-            if (!(*il == *ir))
-            {
-                return false;
-            }
+            return false;
         }
     }
     return true;

@@ -62,17 +62,18 @@ void SPriorityQueue<T, TContainer, TLock>::push(T& task)
 template <typename T, template <typename> typename TContainer, typename TLock>
 void SPriorityQueue<T, TContainer, TLock>::push(T&& task)
 {
-    std::lock_guard<std::mutex> guard(m_lock);
+    
     std::size_t pos = 0;
+    m_lock.lock();
     for (std::size_t idx = 0; idx < m_container.getSize(); ++idx)
     {
         if (m_container[idx] < task)
         {
-            pos++;
+            ++pos;
         }
     }
     m_container.insert(m_container.begin() + pos, std::move(task));
-    
+    m_lock.unlock();
 }
 
 template <typename T, template <typename> typename TContainer, typename TLock>
