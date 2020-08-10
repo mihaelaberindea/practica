@@ -1,0 +1,1 @@
+/usr/bin/clang++     CMakeFiles/Release.dir/Main.cpp.o  -o Release -lpthread 
