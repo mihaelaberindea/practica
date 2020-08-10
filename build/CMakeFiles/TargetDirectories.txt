@@ -1,4 +1,0 @@
-/home/cdulceac/project/build/CMakeFiles/edit_cache.dir
-/home/cdulceac/project/build/CMakeFiles/rebuild_cache.dir
-/home/cdulceac/project/build/CMakeFiles/Release.dir
-/home/cdulceac/project/build/CMakeFiles/Debug.dir

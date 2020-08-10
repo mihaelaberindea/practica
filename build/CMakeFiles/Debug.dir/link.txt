@@ -1,1 +1,0 @@
-/usr/bin/clang++     CMakeFiles/Debug.dir/Main.cpp.o  -o Debug -lpthread 
