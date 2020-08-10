@@ -1,15 +1,16 @@
 #include "ServerSocket.hpp"
 
-ServerSocket(std::string address, std::size_t port)
+ServerSocket::ServerSocket(std::string address, int port)
 {
 
 }
-~ServerSocket()
+
+ServerSocket::~ServerSocket()
 {
     
 }
 
-ClientSocket accept()
+ClientSocket ServerSocket::accept()
 {
     
 }

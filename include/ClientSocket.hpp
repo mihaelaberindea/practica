@@ -5,10 +5,11 @@
 #include <string>
 #include <vector>
 #include <cstddef>
+
 class ClientSocket
 {
 public:
-    ClientSocket(std::string address, std::size_t port);
+    ClientSocket(std::string address, int port);
     ~ClientSocket();
 
     operator bool();
@@ -18,7 +19,8 @@ public:
     void receive(std::vector<std::byte> message);
 
 private:
-    std::size_t m_fd;
+    int m_fd;
+    struct sockaddr_in serv_addr;
 };
 
 #include "ClientSocket.cpp"
